@@ -80,9 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
+                                elevation: 0,
                                 onPrimary: AppColors.app,
                                 primary: AppColors.app[200],
-                                elevation: 3,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
@@ -90,11 +90,11 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(12),
+                                padding: EdgeInsets.all(15),
                                 child: Text(
                                   "Login",
                                   style: TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.app,
                                   ),
@@ -118,20 +118,24 @@ class _LoginPageState extends State<LoginPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                              elevation: 0,
                               onPrimary: AppColors.app[200],
-                              elevation: 3,
                               shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: AppColors.app[200],
+                                  width: 3,
+                                ),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(15),
                                 ),
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(12),
+                              padding: EdgeInsets.all(15),
                               child: Text(
                                 "Register",
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -158,11 +162,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _bottomSheet(context) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (context) => FormLogin(),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) => FormLogin(),
+      );
+    });
   }
 }
 
@@ -252,7 +258,7 @@ class FormLogin extends StatelessWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       onPrimary: AppColors.app[200],
-                      elevation: 5,
+                      elevation: 2,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
@@ -260,11 +266,11 @@ class FormLogin extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: EdgeInsets.all(15),
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),

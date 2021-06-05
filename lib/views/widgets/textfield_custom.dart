@@ -7,11 +7,13 @@ class TextFieldCustom extends StatelessWidget {
   final hintText;
   final controllerInput;
   final validate;
+  final changePassword;
   const TextFieldCustom(
       {Key key,
       this.hintText,
       this.typeInput,
       this.validate,
+      this.changePassword,
       @required this.controllerInput})
       : super(key: key);
 
