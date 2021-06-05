@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-final background = Image.asset(
-  "assets/login/background.jpg",
-);
-
 class AppColors {
   AppColors._(); // this basically makes it so you can instantiate this class
   static const MaterialColor app = MaterialColor(0xff00E19B, <int, Color>{

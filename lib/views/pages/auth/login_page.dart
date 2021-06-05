@@ -27,7 +27,9 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               FittedBox(
                 fit: BoxFit.fill,
-                child: background,
+                child: Image.asset(
+                  "assets/images/login/background.jpg",
+                ),
               ),
               Positioned.fill(
                 child: Align(
@@ -50,10 +52,21 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: Center(
                               child: SvgPicture.asset(
-                                "assets/logo.svg",
+                                "assets/images/logo.svg",
                                 width: size.width * 0.23,
                                 color: AppColors.app,
                               ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(20),
+                          child: Text(
+                            "Hyber King",
+                            style: TextStyle(
+                              fontSize: 40,
+                              color: AppColors.app[200],
+                              fontFamily: 'Boldywolf',
                             ),
                           ),
                         ),
@@ -69,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                               style: ElevatedButton.styleFrom(
                                 onPrimary: AppColors.app,
                                 primary: AppColors.app[200],
-                                elevation: 5,
+                                elevation: 3,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(15),
@@ -106,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               onPrimary: AppColors.app[200],
-                              elevation: 5,
+                              elevation: 3,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(15),

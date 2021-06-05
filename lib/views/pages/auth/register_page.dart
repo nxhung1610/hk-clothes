@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hk_clothes/constant.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -10,7 +11,15 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.app[200],
         elevation: 0,
-        actions: [],
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: AppColors.app,
+              size: 30,
+            )),
       ),
       body: Container(
         color: AppColors.app[200],
