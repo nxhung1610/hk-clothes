@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Positioned.fill(
                 child: Align(
-                  alignment: Alignment.center,
+                  alignment: Alignment.bottomCenter,
                   child: Container(
                     width: size.width,
                     child: Column(
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.02,
+                          height: size.height * 0.3,
                         ),
                         Builder(
                           builder: (context) => Container(
