@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
           bottom: TabBar(
             labelPadding: EdgeInsets.zero,
             labelStyle: TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontFamily: "UbuntuMono",
               fontWeight: FontWeight.bold,
             ),
