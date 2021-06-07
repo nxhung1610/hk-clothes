@@ -3,18 +3,21 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
-import 'package:hk_clothes/controllers/home/dashboard_controller.dart';
+import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
+
+import 'package:hk_clothes/views/dashboard/dashboard_page.dart';
 import 'package:hk_clothes/views/splash/splash.dart';
 
+import 'controllers/dashboard/dashboard_controller.dart';
 import 'views/authentication/login_page.dart';
 import 'views/authentication/register_page.dart';
-import 'views/home/dashboard_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialization.then((value) {
     Get.put(AuthController());
     Get.put(DashboardController());
+    Get.put(HomeController());
   });
   runApp(MyApp());
 }
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: "UbuntuMono",
         primaryColor: AppColors.app,
         primarySwatch: AppColors.app,
         bottomSheetTheme: BottomSheetThemeData(

@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: AppColors.app,
                         ),
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       "Register",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -167,7 +167,7 @@ class FormLogin extends StatelessWidget {
                   child: Text(
                     "Login Your Account",
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -217,7 +217,7 @@ class FormLogin extends StatelessWidget {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),

@@ -100,7 +100,7 @@ class RegisterPage extends StatelessWidget {
                     child: Text(
                       "Sign Up",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

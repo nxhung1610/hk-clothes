@@ -32,6 +32,7 @@ class DashboardPage extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         extendBody: true,
         bottomNavigationBar: SnakeNavigationBar.color(
+          elevation: 1.5,
           shadowColor: Colors.white,
           behaviour: snakeBarStyle,
           snakeShape: snakeShape,
@@ -65,7 +66,7 @@ class DashboardPage extends StatelessWidget {
           ],
         ),
         body: Container(
-          color: AppColors.app[300],
+          color: Colors.white,
           child: IndexedStack(
             index: dashBoardController.selectItemBottom.value,
             children: dashBoardController.pageList,

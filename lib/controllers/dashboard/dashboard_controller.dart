@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:hk_clothes/views/home/account_page.dart';
-import 'package:hk_clothes/views/home/bag_page.dart';
-import 'package:hk_clothes/views/home/home_page.dart';
-import 'package:hk_clothes/views/home/search_page.dart';
+import 'package:hk_clothes/views/dashboard/account/account_page.dart';
+import 'package:hk_clothes/views/dashboard/bag/bag_page.dart';
+import 'package:hk_clothes/views/dashboard/home/home_page.dart';
+import 'package:hk_clothes/views/dashboard/search/search_page.dart';
 
 class DashboardController extends GetxController {
   static DashboardController instance = Get.find();
