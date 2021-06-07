@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hk_clothes/ViewModels/auth/login_controller.dart';
-import 'package:hk_clothes/constant.dart';
-import 'package:hk_clothes/views/pages/auth/login_page.dart';
-import 'package:hk_clothes/views/pages/auth/register_page.dart';
-import 'package:hk_clothes/views/pages/home_page.dart';
+import 'package:hk_clothes/constants/app_color.dart';
+import 'package:hk_clothes/constants/firebase.dart';
+import 'package:hk_clothes/controllers/auth/auth_controller.dart';
+import 'package:hk_clothes/controllers/home/dashboard_controller.dart';
+import 'package:hk_clothes/views/splash/splash.dart';
 
-void main() {
+import 'views/authentication/login_page.dart';
+import 'views/authentication/register_page.dart';
+import 'views/home/dashboard_page.dart';
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initialization.then((value) {
+    Get.put(AuthController());
+    Get.put(DashboardController());
+  });
   runApp(MyApp());
 }
 
@@ -14,20 +23,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: AppColors.app,
         primarySwatch: AppColors.app,
-        canvasColor: Colors.transparent,
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Colors.transparent,
+        ),
       ),
       getPages: [
         GetPage(
-          name: "/main",
-          page: () => HomePage(),
+          name: "/home",
+          page: () => DashboardPage(),
         ),
         GetPage(
           name: "/login",
@@ -37,8 +46,12 @@ class MyApp extends StatelessWidget {
           name: "/register",
           page: () => RegisterPage(),
         ),
+        GetPage(
+          name: "/splash",
+          page: () => SplashScreen(),
+        ),
       ],
-      initialRoute: "/login",
+      initialRoute: "/splash",
     );
   }
 }

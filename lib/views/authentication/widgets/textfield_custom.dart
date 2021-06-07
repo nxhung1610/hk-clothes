@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hk_clothes/constant.dart';
+import 'package:hk_clothes/constants/app_color.dart';
 
 class TextFieldCustom extends StatelessWidget {
   final typeInput;
