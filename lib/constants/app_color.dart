@@ -8,10 +8,10 @@ class AppColors {
     200: const Color(0xffffffff),
     300: const Color(0xffFEE7EB),
     400: const Color(0xff606060),
-    500: const Color(0xff00E19B),
-    600: const Color(0xff00E19B),
-    700: const Color(0xff00E19B),
-    800: const Color(0xff00E19B),
-    900: const Color(0xff00E19B)
+    500: const Color(0xffffffff),
+    600: const Color(0xffffffff),
+    700: const Color(0xffffffff),
+    800: const Color(0xffffffff),
+    900: const Color(0xffffffff)
   });
 }
