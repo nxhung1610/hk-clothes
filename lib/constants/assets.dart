@@ -10,21 +10,21 @@ final logoSplash = Image.asset(
   "assets/images/logo_splash.png",
 );
 
-final category_shirt = SvgPicture.asset(
-  "assets/images/dashboard/shirt.svg",
+final categoryShirt = Image.asset(
+  "assets/images/dashboard/shirt.png",
 );
-final category_t_shirt = SvgPicture.asset(
-  "assets/images/dashboard/t-shirt.svg",
+final categoryTShirt = Image.asset(
+  "assets/images/dashboard/t-shirt.png",
 );
-final category_hoodie = SvgPicture.asset(
-  "assets/images/dashboard/hoodie.svg",
+final categoryHoodie = Image.asset(
+  "assets/images/dashboard/hoodie.png",
 );
-final category_pants = SvgPicture.asset(
-  "assets/images/dashboard/pants.svg",
+final categoryPants = Image.asset(
+  "assets/images/dashboard/pants.png",
 );
-final category_short = SvgPicture.asset(
-  "assets/images/dashboard/short.svg",
+final categoryShort = Image.asset(
+  "assets/images/dashboard/short.png",
 );
-final category_sweatshirt = SvgPicture.asset(
-  "assets/images/dashboard/sweatshirt.svg",
+final categorySweatshirt = Image.asset(
+  "assets/images/dashboard/sweatshirt.png",
 );

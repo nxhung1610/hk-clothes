@@ -10,7 +10,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBody: true,
       body: Container(
+        color: AppColors.app[400],
         alignment: Alignment.center,
         child: Column(
           mainAxisSize: MainAxisSize.min,

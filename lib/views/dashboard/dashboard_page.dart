@@ -38,9 +38,9 @@ class DashboardPage extends StatelessWidget {
           snakeShape: snakeShape,
           shape: bottomBarShape,
           padding: padding,
-          snakeViewColor: AppColors.app,
+          snakeViewColor: AppColors.app[100],
           selectedItemColor:
-              snakeShape == SnakeShape.indicator ? AppColors.app : null,
+              snakeShape == SnakeShape.indicator ? AppColors.app[400] : null,
           unselectedItemColor: Colors.grey,
           showUnselectedLabels: false,
           showSelectedLabels: false,

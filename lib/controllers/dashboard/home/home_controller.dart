@@ -25,12 +25,12 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
 
   // Category
   final listCategory = [
-    Category(name: "Shirt", icon: category_shirt),
-    Category(name: "T-Shirt", icon: category_t_shirt),
-    Category(name: "Hoodies", icon: category_hoodie),
-    Category(name: "Short", icon: category_short),
-    Category(name: "Pants", icon: category_pants),
-    Category(name: "Sweatshirt", icon: category_sweatshirt),
+    Category(name: "Shirt", icon: categoryShirt),
+    Category(name: "T-Shirt", icon: categoryTShirt),
+    Category(name: "Hoodies", icon: categoryHoodie),
+    Category(name: "Short", icon: categoryShort),
+    Category(name: "Pants", icon: categoryPants),
+    Category(name: "Sweatshirt", icon: categorySweatshirt),
   ];
 
   @override

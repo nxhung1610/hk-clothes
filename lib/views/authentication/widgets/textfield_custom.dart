@@ -32,6 +32,7 @@ class TextFieldCustom extends StatelessWidget {
         cursorRadius: Radius.circular(10),
         style: TextStyle(
           fontSize: 18,
+          fontWeight: FontWeight.w800,
         ),
         decoration: InputDecoration(
           prefixIcon: Icon(

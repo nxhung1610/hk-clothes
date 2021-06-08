@@ -11,22 +11,19 @@ class CategoryItem extends StatelessWidget {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: InkWell(
         onTap: () {},
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
         child: Container(
-          padding: EdgeInsets.all(18),
+          padding: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               Expanded(
                 child: categoryItem.icon,
-              ),
-              SizedBox(
-                height: size.height * 0.02,
               ),
               Text(
                 categoryItem.name,

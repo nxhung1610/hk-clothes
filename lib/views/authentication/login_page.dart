@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.white,
+          color: AppColors.app[400],
           height: size.height,
           width: size.width,
           child: Column(
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColors.app[100],
                       ),
                     ),
                   ),

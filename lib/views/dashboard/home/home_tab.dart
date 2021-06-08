@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/assets.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/views/dashboard/home/widgets/category_widget.dart';
@@ -21,7 +22,10 @@ class HomeTab extends StatelessWidget {
               child: Center(
                 child: Text(
                   "SHOP BY CATEGORY",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
