@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   AppColors._(); // this basically makes it so you can instantiate this class
-  static const MaterialColor app = MaterialColor(0xffFEC6CF, <int, Color>{
-    50: const Color(0xffFEC6CF),
+  static const MaterialColor app = MaterialColor(0xff27272B, <int, Color>{
+    50: const Color(0xff27272B),
     100: const Color(0xff27272B),
     200: const Color(0xffffffff),
     300: const Color(0xffFEE7EB),

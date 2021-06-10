@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
       bottom: false,
       top: true,
       child: Scaffold(
-        backgroundColor: AppColors.app[300],
+        backgroundColor: Colors.grey[50],
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: IconButton(
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ],
-          elevation: 0,
+          elevation: 2,
           title: Text(
             "Hyber King",
             style: TextStyle(
@@ -45,13 +45,14 @@ class HomePage extends StatelessWidget {
           bottom: TabBar(
             labelPadding: EdgeInsets.zero,
             labelStyle: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontFamily: "UbuntuMono",
               fontWeight: FontWeight.bold,
             ),
+            labelColor: AppColors.app,
             indicator: UnderlineTabIndicator(
               borderSide: BorderSide(
-                  width: 3.0,
+                  width: 4.0,
                   style: BorderStyle.solid,
                   color: AppColors.app[400]),
               insets: EdgeInsets.symmetric(horizontal: size.width * 0.12),

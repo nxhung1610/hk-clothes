@@ -24,7 +24,7 @@ class DashboardPage extends StatelessWidget {
     SnakeBarBehaviour snakeBarStyle = SnakeBarBehaviour.floating;
 
     EdgeInsets padding =
-        EdgeInsets.symmetric(horizontal: size.width * 0.17, vertical: 20);
+        EdgeInsets.symmetric(horizontal: size.width * 0.17, vertical: 10);
 
     return Obx(
       () => Scaffold(
@@ -33,12 +33,12 @@ class DashboardPage extends StatelessWidget {
         extendBody: true,
         bottomNavigationBar: SnakeNavigationBar.color(
           elevation: 1.5,
-          shadowColor: Colors.white,
+          shadowColor: AppColors.app[100],
           behaviour: snakeBarStyle,
           snakeShape: snakeShape,
           shape: bottomBarShape,
           padding: padding,
-          snakeViewColor: AppColors.app[100],
+          snakeViewColor: AppColors.app,
           selectedItemColor:
               snakeShape == SnakeShape.indicator ? AppColors.app[400] : null,
           unselectedItemColor: Colors.grey,

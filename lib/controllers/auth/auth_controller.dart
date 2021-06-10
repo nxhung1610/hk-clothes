@@ -2,10 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/firebase.dart';
+import 'package:hk_clothes/utils/helpers/show_loading.dart';
+import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  TextEditingController emailController, passwordController;
+  TextEditingController emailController,
+      passwordController,
+      passwordVerifyController;
 
   Rx<User> firebaseUser;
   RxBool isLoggedIn = false.obs;
@@ -16,6 +20,7 @@ class AuthController extends GetxController {
     // Init Controller
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    passwordVerifyController = TextEditingController();
   }
 
   @override
@@ -44,8 +49,52 @@ class AuthController extends GetxController {
   }
 
   void signIn() async {
+    if (!validatedInputSignIn()) {
+      showSnackbar("Login Failed", "Input not valid", false);
+      return;
+    }
+    showLoading();
+    await Future.delayed(Duration(seconds: 5));
     Get.offAllNamed("/home");
   }
 
-  void signUp() async {}
+  Future signUp() async {
+    showLoading();
+    if (!validatedInputSignUp()) {
+      dismissLoadingWidget();
+    }
+    try {
+      await firebaseAuth.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  bool validatedInputSignUp() {
+    if (passwordController.text.trim().isEmpty ||
+        passwordVerifyController.text.trim().isEmpty ||
+        !emailController.text.trim().isEmail) {
+      return false;
+    }
+    if (passwordController.text != passwordVerifyController.text) {
+      return false;
+    }
+    return true;
+  }
+
+  bool validatedInputSignIn() {
+    if (passwordController.text.trim().isEmpty ||
+        !emailController.text.trim().isEmail) {
+      return false;
+    }
+    return true;
+  }
 }

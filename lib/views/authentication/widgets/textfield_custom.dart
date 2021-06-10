@@ -20,8 +20,7 @@ class TextFieldCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextFormField(
-        validator: (value) => validate(value),
+      child: TextField(
         controller: controllerInput,
         keyboardType: typeInput == 0
             ? TextInputType.emailAddress

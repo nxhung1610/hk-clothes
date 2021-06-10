@@ -53,7 +53,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/images/login/
     - assets/images/dashboard/
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -70,18 +69,17 @@ flutter:
   fonts:
     - family: Elowen
       fonts:
-        - asset: assets/fonts/Elowen.ttf
+        - asset: fonts/Elowen.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
     - family: UbuntuMono
       fonts:
-        - asset: assets/fonts/UbuntuMono-Regular.ttf
-        - asset: assets/fonts/UbuntuMono-Bold.ttf
-          weight: 300
-        - asset: assets/fonts/UbuntuMono-Italic.ttf
+        - asset: fonts/UbuntuMono-Regular.ttf
+        - asset: fonts/UbuntuMono-Bold.ttf
+          weight: 700
+        - asset: fonts/UbuntuMono-Italic.ttf
           style: italic
-        - asset: assets/fonts/UbuntuMono-BoldItalic.ttf
-          weight: 400
+
         
         
   #   - family: Trajan Pro
