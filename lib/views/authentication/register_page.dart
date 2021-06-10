@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
+import 'package:hk_clothes/constants/controller.dart';
 
 import 'widgets/textfield_custom.dart';
 
@@ -24,12 +25,13 @@ class RegisterPage extends StatelessWidget {
               size: 30,
             )),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: AppColors.app[200],
-          width: size.width,
-          height: size.height,
+      body: Container(
+        color: AppColors.app[200],
+        width: size.width,
+        height: size.height,
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: EdgeInsets.all(15),
@@ -49,7 +51,7 @@ class RegisterPage extends StatelessWidget {
                 child: TextFieldCustom(
                   hintText: "Email",
                   typeInput: 0,
-                  controllerInput: null,
+                  controllerInput: authController.emailController,
                 ),
               ),
 
@@ -63,7 +65,7 @@ class RegisterPage extends StatelessWidget {
                 child: TextFieldCustom(
                   hintText: "Password",
                   typeInput: 1,
-                  controllerInput: null,
+                  controllerInput: authController.passwordController,
                 ),
               ),
               SizedBox(
@@ -76,7 +78,7 @@ class RegisterPage extends StatelessWidget {
                 child: TextFieldCustom(
                   hintText: "Verify Password",
                   typeInput: 1,
-                  controllerInput: null,
+                  controllerInput: authController.passwordVerifyController,
                 ),
               ),
               SizedBox(
@@ -106,7 +108,9 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    authController.signUp();
+                  },
                 ),
               ),
             ],

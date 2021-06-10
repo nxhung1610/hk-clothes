@@ -59,14 +59,17 @@ class AuthController extends GetxController {
   }
 
   Future signUp() async {
-    showLoading();
     if (!validatedInputSignUp()) {
-      dismissLoadingWidget();
+      showSnackbar("Sign Up Failed", "Input not valid", false);
+      return;
     }
+    showLoading();
+
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      dismissLoadingWidget();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
