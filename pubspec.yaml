@@ -72,10 +72,6 @@ flutter:
     - family: UbuntuMono
       fonts:
         - asset: fonts/UbuntuMono-Regular.ttf
-        - asset: fonts/UbuntuMono-Bold.ttf
-          weight: 300
-        - asset: fonts/UbuntuMono-Italic.ttf
-          style: italic
 
         
         
