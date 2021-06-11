@@ -69,8 +69,9 @@ class AuthController extends GetxController {
       await firebaseAuth.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-      dismissLoadingWidget();
+
     } on FirebaseAuthException catch (e) {
+
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
@@ -79,6 +80,9 @@ class AuthController extends GetxController {
     } catch (e) {
       print(e);
     }
+
+    dismissLoadingWidget();
+
   }
 
   bool validatedInputSignUp() {

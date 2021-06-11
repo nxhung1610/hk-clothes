@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
+import 'package:hk_clothes/controllers/dashboard/account/account_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
 
 import 'package:hk_clothes/views/dashboard/dashboard_page.dart';
@@ -24,6 +25,7 @@ Future main() async {
     Get.put(AuthController());
     Get.put(DashboardController());
     Get.put(HomeController());
+    Get.put(AccountController());
   });
   runApp(MyApp());
 }

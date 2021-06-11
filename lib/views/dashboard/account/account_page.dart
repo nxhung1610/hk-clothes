@@ -1,13 +1,169 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hk_clothes/constants/app_color.dart';
+import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/controllers/dashboard/account/account_controller.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Account"),
+    Size size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          actions: [
+            IconButton(
+                icon: Icon(Icons.settings_rounded),
+                color: AppColors.app[400],
+                onPressed: () {})
+          ],
+          leading: IconButton(
+            icon: Icon(Icons.notifications),
+            color: AppColors.app[400],
+            onPressed: () {},
+          ),
+        ),
+        body: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15 , vertical:  10),
+                  child: Container(
+                      width: 90.0,
+                      height: 90.0,
+                      decoration: new BoxDecoration(
+                          color: AppColors.app.shade400,
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new AssetImage(
+                                  'assets/images/logo_splash.png')))),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        'USER NAME HERE',
+                        style:
+                            TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 5),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'Edit Profile',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              child: Card(
+                
+                child: Padding(
+                  padding:EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.snackbar("Snackbar1", "Order");
+                        },
+                        child: SizedBox(
+                          width: 100,
+                          child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '0',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text('Order',
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.snackbar("Snackbar2", "Wish List");
+                        },
+                        child: SizedBox(
+                          width: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '0',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text('Wish List',
+                                  style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            TabBar(
+              labelPadding: EdgeInsets.zero,
+              labelStyle: TextStyle(
+                fontSize: 18,
+                fontFamily: "UbuntuMono",
+                fontWeight: FontWeight.bold,
+              ),
+              labelColor: AppColors.app,
+              indicator: UnderlineTabIndicator(
+                borderSide: BorderSide(
+                    width: 4.0,
+                    style: BorderStyle.solid,
+                    color: AppColors.app[400]),
+                insets: EdgeInsets.symmetric(horizontal: size.width * 0.12),
+              ),
+              controller: accountController.tabController,
+              tabs: accountController.listTabItem,
+            ),
+            Expanded(
+                child: TabBarView(
+              controller: accountController.tabController,
+              children: accountController.listTab,
+            )),
+          ],
+        ),
       ),
     );
   }
