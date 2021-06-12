@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:hk_clothes/constants/app_color.dart';
-import 'package:hk_clothes/constants/assets.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/views/dashboard/home/widgets/category_widget.dart';
 import 'package:hk_clothes/views/dashboard/home/widgets/clothes_widget.dart';
@@ -61,13 +59,18 @@ class HomeTab extends StatelessWidget {
               child: SizedBox(
                 height: size.width * (1 / 2),
                 width: double.infinity,
-                child: ListView.builder(
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: 10,
                   itemBuilder: (context, index) => ClothesItem(
                     size: size.width * (1 / 3),
                     clothes: null,
                   ),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: size.width * 0.02,
+                    );
+                  },
                 ),
               ),
             ),
@@ -80,6 +83,24 @@ class HomeTab extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 0.65,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                ),
+                itemCount: 20,
+                itemBuilder: (context, index) => ClothesItem(
+                  size: size.width * (1 / 3),
+                  clothes: null,
+                ),
+              ),
+            )
           ],
         ),
       ),
