@@ -11,7 +11,7 @@ import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  static UserInfor userInfor;
+  UserInfor userInfor;
   TextEditingController emailController,
       passwordController,
       passwordVerifyController;

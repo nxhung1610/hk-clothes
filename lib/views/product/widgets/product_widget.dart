@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/assets.dart';
 
-class ClothesItem extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final size;
   final clothes;
-  final function;
-  const ClothesItem(
-      {Key key, @required this.size, @required this.clothes, this.function})
+  final Function function;
+  const ProductItem(
+      {Key key,
+      @required this.size,
+      @required this.clothes,
+      @required this.function})
       : super(key: key);
 
   @override
@@ -51,7 +54,7 @@ class ClothesItem extends StatelessWidget {
               child: InkWell(
                 splashColor: AppColors.app[500].withOpacity(0.2),
                 splashFactory: InkRipple.splashFactory,
-                onTap: () => function,
+                onTap: () => function(clothes),
               ),
             ),
           ),

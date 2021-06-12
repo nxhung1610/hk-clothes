@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hk_clothes/views/dashboard/home/widgets/clothes_widget.dart';
+import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/views/product/widgets/product_widget.dart';
 
 class SaleTab extends StatelessWidget {
   const SaleTab({Key key}) : super(key: key);
@@ -26,9 +27,10 @@ class SaleTab extends StatelessWidget {
                     crossAxisSpacing: 5,
                   ),
                   itemCount: 60,
-                  itemBuilder: (context, index) => ClothesItem(
+                  itemBuilder: (context, index) => ProductItem(
                     size: size.width * (1 / 3),
                     clothes: null,
+                    function: productController.showInforItem,
                   ),
                 ),
               ),

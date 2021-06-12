@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/views/dashboard/home/widgets/category_widget.dart';
-import 'package:hk_clothes/views/dashboard/home/widgets/clothes_widget.dart';
+import 'package:hk_clothes/views/product/widgets/product_widget.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key key}) : super(key: key);
@@ -62,9 +62,10 @@ class HomeTab extends StatelessWidget {
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: 10,
-                  itemBuilder: (context, index) => ClothesItem(
+                  itemBuilder: (context, index) => ProductItem(
                     size: size.width * (1 / 3),
                     clothes: null,
+                    function: productController.showInforItem,
                   ),
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
@@ -95,9 +96,10 @@ class HomeTab extends StatelessWidget {
                   crossAxisSpacing: 5,
                 ),
                 itemCount: 20,
-                itemBuilder: (context, index) => ClothesItem(
+                itemBuilder: (context, index) => ProductItem(
                   size: size.width * (1 / 3),
                   clothes: null,
+                  function: productController.showInforItem,
                 ),
               ),
             )
