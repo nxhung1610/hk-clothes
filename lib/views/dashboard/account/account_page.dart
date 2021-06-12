@@ -60,7 +60,9 @@ class AccountPage extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed("/editprofile");
+                          },
                         child: Text(
                           'Edit Profile',
                           style: TextStyle(

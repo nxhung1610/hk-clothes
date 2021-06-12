@@ -7,6 +7,7 @@ import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/account/account_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
+import 'package:hk_clothes/views/dashboard/account/editprofile/editprofile_page.dart';
 
 import 'package:hk_clothes/views/dashboard/dashboard_page.dart';
 import 'package:hk_clothes/views/splash/splash.dart';
@@ -62,6 +63,9 @@ class MyApp extends StatelessWidget {
           name: "/splash",
           page: () => SplashScreen(),
         ),
+        GetPage(
+            name: '/editprofile',
+            page: () => EditProfilePage()),
       ],
       initialRoute: "/splash",
     );
