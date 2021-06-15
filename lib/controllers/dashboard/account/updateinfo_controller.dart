@@ -20,5 +20,4 @@ class UpdateInfoController extends GetxController with SingleGetTickerProviderMi
 
 
 
-
 }

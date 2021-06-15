@@ -53,7 +53,7 @@ class EditProfilePage extends StatelessWidget {
                           fontSize: 18,
                           color: AppColors.app[500],
                           fontWeight: FontWeight.bold)),
-                  function:  1,
+                  function:  2,
                 ),
                 Divider(thickness: 2),
                 EditProfile(
@@ -63,7 +63,7 @@ class EditProfilePage extends StatelessWidget {
                             fontSize: 18,
                             color: AppColors.app[500],
                             fontWeight: FontWeight.bold)),
-                    function: 1),
+                    function: 3),
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Nickname",
@@ -72,7 +72,7 @@ class EditProfilePage extends StatelessWidget {
                             fontSize: 18,
                             color: AppColors.app[500],
                             fontWeight: FontWeight.bold)),
-                    function: 1),
+                    function: 4),
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Gender",
@@ -81,7 +81,7 @@ class EditProfilePage extends StatelessWidget {
                             fontSize: 18,
                             color: AppColors.app[500],
                             fontWeight: FontWeight.bold)),
-                    function: 1),
+                    function: 5),
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Birthday",
@@ -90,7 +90,7 @@ class EditProfilePage extends StatelessWidget {
                             fontSize: 18,
                             color: AppColors.app[500],
                             fontWeight: FontWeight.w600)),
-                    function: 1),
+                    function: 6),
                 Divider(thickness: 2),
                 Container(
                     width: double.infinity,
