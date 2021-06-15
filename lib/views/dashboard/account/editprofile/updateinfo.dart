@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
+import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/controllers/auth/auth_controller.dart';
+import 'package:hk_clothes/controllers/dashboard/account/updateinfo_controller.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UpdateInfo extends StatelessWidget {
-
-
   const UpdateInfo({Key key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,6 @@ class UpdateInfo extends StatelessWidget {
           title: Text(
             param[0].toString(),
             style: TextStyle(
-
                 color: AppColors.app[400],
                 fontSize: 22,
                 fontWeight: FontWeight.bold),
@@ -32,26 +32,31 @@ class UpdateInfo extends StatelessWidget {
           color: AppColors.app[550],
           child: Column(
             children: [
-              param[1]==1?Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: InkWell(
-                  onTap: (){},
-                  child: CircleAvatar(
-                    radius: 100,
-
-                  ),
-                ),
-              ):
-              TextField(
-                style: TextStyle(fontSize: 20),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: param[0],
-                  fillColor: Colors.white,
-                  filled:  true,
-                  contentPadding: EdgeInsets.all(20)
-                ),
-              ),
+              param[1] == 1
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: InkWell(
+                        onTap: () {
+                          updateInfoController.getImage(ImageSource.gallery);
+                        },
+                        child: CircleAvatar(
+                            radius: 100,
+                            backgroundImage: AuthController
+                                    .userInfor.photoUrl.isEmpty
+                                ? AssetImage('assets/images/logo_splash.png')
+                                : NetworkImage(
+                                    AuthController.userInfor.photoUrl)),
+                      ),
+                    )
+                  : TextField(
+                      style: TextStyle(fontSize: 20),
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: param[0],
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.all(20)),
+                    ),
               Container(
                   width: double.infinity,
                   margin: EdgeInsets.all(10),
