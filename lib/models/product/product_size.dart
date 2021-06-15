@@ -6,7 +6,6 @@ class ProductSize {
   ProductSize({this.psid, this.pid, this.sid});
 
   ProductSize.fromJson(Map<String, dynamic> json) {
-    psid = json['psid'];
     pid = json['pid'];
     sid = json['sid'];
   }

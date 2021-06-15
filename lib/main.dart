@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
           name: "/product",
           page: () => ProductPage(),
           transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 200),
         ),
       ],
       initialRoute: "/splash",

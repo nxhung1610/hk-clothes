@@ -21,6 +21,7 @@ class Product {
     data['product_name'] = this.productName;
     data['type'] = this.type;
     data['price'] = this.price;
+    data['image_url'] = this.imageUrl;
     return data;
   }
 }
