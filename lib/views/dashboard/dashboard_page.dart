@@ -56,7 +56,7 @@ class DashboardPage extends StatelessWidget {
               label: 'search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_outlined),
+              icon: Icon(Icons.local_shipping),
               label: 'bag',
             ),
             BottomNavigationBarItem(
