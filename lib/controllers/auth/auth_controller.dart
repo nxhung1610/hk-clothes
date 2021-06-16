@@ -11,13 +11,14 @@ import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  static UserInfor userInfor;
+  UserInfor userInfor;
   TextEditingController emailController,
       passwordController,
       passwordVerifyController;
 
   Rx<User> firebaseUser;
   RxBool isLoggedIn = false.obs;
+  bool _isActive = false;
 
   @override
   void onInit() {
@@ -40,10 +41,13 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAllNamed("/login");
     } else {
-      await userCheckDatabase(user).then((value) {
-        userInfor = value;
-        Get.offAllNamed("/home");
-      });
+      if (!_isActive) {
+        _isActive = true;
+        await userCheckDatabase(user).then((value) {
+          userInfor = value;
+          Get.offAllNamed("/home");
+        });
+      }
     }
   }
 
@@ -139,5 +143,10 @@ class AuthController extends GetxController {
       await firestore.collection("users").doc(k.uid).set(k.toJson());
       return k;
     }
+  }
+
+  Future signOut() async {
+    firebaseAuth.signOut();
+    firebaseUser = null;
   }
 }
