@@ -5,8 +5,11 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/account/updateinfo_controller.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+
 
 class UpdateInfo extends StatelessWidget {
   const UpdateInfo({Key key}) : super(key: key);
@@ -16,6 +19,7 @@ class UpdateInfo extends StatelessWidget {
     var param = Get.arguments;
     final controller = TextEditingController();
     DateTime currentDate = DateTime.now();
+    String groupValue ='';
 
     Future<void> _selectDate(BuildContext context) async {
       final DateTime pickedDate = await showDatePicker(
@@ -29,74 +33,6 @@ class UpdateInfo extends StatelessWidget {
         String formatted = formatter.format(currentDate);
         controller.text = formatted;
       }
-    }
-
-    Future<void> _showMyDialog(BuildContext context) async {
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('AlertDialog Title'),
-            content: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Radio(
-                        activeColor: Theme.of(context).primaryColor,
-                        value: 0,
-                        onChanged: (value) {
-                          controller.text = value;
-                        },
-                      ),
-                      Text("Male")
-                    ],
-                  ), Row(
-                    children: [
-                      Radio(
-                        activeColor: Theme.of(context).primaryColor,
-                        value: 1,
-                        onChanged: (value) {
-                          controller.text = value;
-                        },
-                      ),
-                      Text("Female")
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        activeColor: Theme.of(context).primaryColor,
-                        value: 2,
-                        onChanged: (value) {
-                          controller.text = value;
-                        },
-                      ),
-                      Text("Others")
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Confirm'),
-                onPressed: () {
-                  print('Confirmed');
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
     }
 
     return GestureDetector(
@@ -143,7 +79,43 @@ class UpdateInfo extends StatelessWidget {
 
                             break;
                           case 5:
-                            _showMyDialog(context);
+                            Get.defaultDialog(
+                              title: "Choose Gender",
+                              barrierDismissible: true,
+                              content: Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    title: const Text('male'),
+                                    leading: Radio(
+                                      value: 'Male',
+                                      groupValue: groupValue,
+                                      onChanged: (val)
+                                      {groupValue=val;}
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: const Text('female'),
+                                    leading: Radio(
+                                      value: 'Female',
+                                      groupValue: groupValue,
+                                      onChanged:(val){
+                                        groupValue=val;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              textCancel: "Cancel",
+                              textConfirm: "OK",
+                              onCancel: () {
+
+                              },
+                              onConfirm: () {
+
+
+                              },
+                            );
+
                             break;
                         }
                       },
