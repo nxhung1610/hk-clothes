@@ -63,11 +63,11 @@ class UpdateInfo extends StatelessWidget {
                         },
                         child: CircleAvatar(
                             radius: 100,
-                            backgroundImage: AuthController
+                            backgroundImage: authController
                                     .userInfor.photoUrl.isEmpty
                                 ? AssetImage('assets/images/logo_splash.png')
                                 : NetworkImage(
-                                    AuthController.userInfor.photoUrl)),
+                                    authController.userInfor.photoUrl)),
                       ),
                     )
                   : TextField(

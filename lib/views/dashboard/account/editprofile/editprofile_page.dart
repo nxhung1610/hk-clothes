@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
+import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/views/dashboard/account/widget/editprofile_widget.dart';
 
@@ -48,7 +49,7 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                   title: "First Name",
-                  widget: Text(AuthController.userInfor.firstName,
+                  widget: Text(authController.userInfor.firstName,
                       style: TextStyle(
                           fontSize: 18,
                           color: AppColors.app[500],
@@ -58,7 +59,7 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Last Name",
-                    widget: Text(AuthController.userInfor.lastName,
+                    widget: Text(authController.userInfor.lastName,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
@@ -67,7 +68,7 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Nickname",
-                    widget: Text(AuthController.userInfor.nickname,
+                    widget: Text(authController.userInfor.nickname,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
@@ -76,7 +77,7 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Gender",
-                    widget: Text(AuthController.userInfor.gender,
+                    widget: Text(authController.userInfor.gender,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
@@ -85,7 +86,7 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Birthday",
-                    widget: Text(AuthController.userInfor.birthday,
+                    widget: Text(authController.userInfor.birthday,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],

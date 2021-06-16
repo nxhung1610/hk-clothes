@@ -6,10 +6,16 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
+import 'package:hk_clothes/views/dashboard/account/editprofile/editprofile_page.dart';
+import 'package:hk_clothes/views/dashboard/account/editprofile/updateinfo.dart';
 
 import 'package:hk_clothes/views/dashboard/dashboard_page.dart';
+import 'package:hk_clothes/views/product/product_page.dart';
 import 'package:hk_clothes/views/splash/splash.dart';
 
+import 'controllers/clothes/product_controller.dart';
+import 'controllers/dashboard/account/account_controller.dart';
+import 'controllers/dashboard/account/updateinfo_controller.dart';
 import 'controllers/dashboard/dashboard_controller.dart';
 import 'views/authentication/login_page.dart';
 import 'views/authentication/register_page.dart';
