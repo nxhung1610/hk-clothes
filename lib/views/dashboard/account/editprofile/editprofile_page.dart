@@ -35,6 +35,7 @@ class EditProfilePage extends StatelessWidget {
               children: [
                 EditProfile(
                     title: "Change your photo",
+                    value: authController.userInfor.value.photoUrl,
                     widget: Container(
                         width: 60.0,
                         height: 60.0,
@@ -49,17 +50,19 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                   title: "First Name",
-                  widget: Text(authController.userInfor.firstName,
+                  value: authController.userInfor.value.firstName,
+                  widget: Text(authController.userInfor.value.firstName,
                       style: TextStyle(
                           fontSize: 18,
                           color: AppColors.app[500],
                           fontWeight: FontWeight.bold)),
-                  function:  2,
+                  function: 2,
                 ),
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Last Name",
-                    widget: Text(authController.userInfor.lastName,
+                    value: authController.userInfor.value.lastName,
+                    widget: Text(authController.userInfor.value.lastName,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
@@ -68,7 +71,8 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Nickname",
-                    widget: Text(authController.userInfor.nickname,
+                    value: authController.userInfor.value.nickname,
+                    widget: Text(authController.userInfor.value.nickname,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
@@ -77,7 +81,8 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Gender",
-                    widget: Text(authController.userInfor.gender,
+                    value: authController.userInfor.value.gender,
+                    widget: Text(authController.userInfor.value.gender,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
@@ -86,7 +91,8 @@ class EditProfilePage extends StatelessWidget {
                 Divider(thickness: 2),
                 EditProfile(
                     title: "Birthday",
-                    widget: Text(authController.userInfor.birthday,
+                    value: authController.userInfor.value.birthday,
+                    widget: Text(authController.userInfor.value.birthday,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],

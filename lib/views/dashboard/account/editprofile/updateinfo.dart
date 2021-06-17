@@ -9,8 +9,6 @@ import 'package:hk_clothes/controllers/dashboard/account/updateinfo_controller.d
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-
-
 class UpdateInfo extends StatelessWidget {
   const UpdateInfo({Key key}) : super(key: key);
 
@@ -19,7 +17,7 @@ class UpdateInfo extends StatelessWidget {
     var param = Get.arguments;
     final controller = TextEditingController();
     DateTime currentDate = DateTime.now();
-    String groupValue ='';
+    String groupValue = '';
 
     Future<void> _selectDate(BuildContext context) async {
       final DateTime pickedDate = await showDatePicker(
@@ -32,6 +30,81 @@ class UpdateInfo extends StatelessWidget {
         DateFormat formatter = DateFormat('dd-MM-yyyy');
         String formatted = formatter.format(currentDate);
         controller.text = formatted;
+      }
+    }
+
+    Widget input(BuildContext context, int type, String value) {
+      switch (type) {
+        case 1:
+          return Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: InkWell(
+              onTap: () {
+                updateInfoController.getImage(ImageSource.gallery);
+              },
+              child: CircleAvatar(
+                  radius: 100,
+                  backgroundImage: authController
+                          .userInfor.value.photoUrl.isEmpty
+                      ? AssetImage('assets/images/logo_splash.png')
+                      : NetworkImage(authController.userInfor.value.photoUrl)),
+            ),
+          );
+          break;
+        default:
+          controller.text = value;
+          return TextField(
+            readOnly: (type == 6 || type == 5) ? true : false,
+            onTap: () {
+              switch (type) {
+                case 6:
+                  _selectDate(context);
+                  break;
+                case 5:
+                  Get.defaultDialog(
+                    title: "Choose Gender",
+                    barrierDismissible: true,
+                    content: Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: const Text('male'),
+                          leading: Radio(
+                              value: 'Male',
+                              groupValue: groupValue,
+                              onChanged: (val) {
+                                groupValue = val;
+                              }),
+                        ),
+                        ListTile(
+                          title: const Text('female'),
+                          leading: Radio(
+                            value: 'Female',
+                            groupValue: groupValue,
+                            onChanged: (val) {
+                              groupValue = val;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    textCancel: "Cancel",
+                    textConfirm: "OK",
+                    onCancel: () {},
+                    onConfirm: () {},
+                  );
+
+                  break;
+              }
+            },
+            controller: controller,
+            style: TextStyle(fontSize: 20),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: param[0],
+                fillColor: Colors.white,
+                filled: true,
+                contentPadding: EdgeInsets.all(20)),
+          );
       }
     }
 
@@ -54,80 +127,7 @@ class UpdateInfo extends StatelessWidget {
           color: AppColors.app[550],
           child: Column(
             children: [
-              param[1] == 1
-                  ? Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: InkWell(
-                        onTap: () {
-                          updateInfoController.getImage(ImageSource.gallery);
-                        },
-                        child: CircleAvatar(
-                            radius: 100,
-                            backgroundImage: authController
-                                    .userInfor.photoUrl.isEmpty
-                                ? AssetImage('assets/images/logo_splash.png')
-                                : NetworkImage(
-                                    authController.userInfor.photoUrl)),
-                      ),
-                    )
-                  : TextField(
-                      readOnly: (param[1] == 6 || param[1] == 5) ? true : false,
-                      onTap: () {
-                        switch (param[1]) {
-                          case 6:
-                            _selectDate(context);
-
-                            break;
-                          case 5:
-                            Get.defaultDialog(
-                              title: "Choose Gender",
-                              barrierDismissible: true,
-                              content: Column(
-                                children: <Widget>[
-                                  ListTile(
-                                    title: const Text('male'),
-                                    leading: Radio(
-                                      value: 'Male',
-                                      groupValue: groupValue,
-                                      onChanged: (val)
-                                      {groupValue=val;}
-                                    ),
-                                  ),
-                                  ListTile(
-                                    title: const Text('female'),
-                                    leading: Radio(
-                                      value: 'Female',
-                                      groupValue: groupValue,
-                                      onChanged:(val){
-                                        groupValue=val;
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              textCancel: "Cancel",
-                              textConfirm: "OK",
-                              onCancel: () {
-
-                              },
-                              onConfirm: () {
-
-
-                              },
-                            );
-
-                            break;
-                        }
-                      },
-                      controller: controller,
-                      style: TextStyle(fontSize: 20),
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: param[0],
-                          fillColor: Colors.white,
-                          filled: true,
-                          contentPadding: EdgeInsets.all(20)),
-                    ),
+              input(context, param[1], param[2]),
               Container(
                   width: double.infinity,
                   margin: EdgeInsets.all(10),

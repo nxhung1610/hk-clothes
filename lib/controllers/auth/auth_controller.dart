@@ -11,7 +11,7 @@ import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  UserInfor userInfor;
+  Rx<UserInfor> userInfor;
   TextEditingController emailController,
       passwordController,
       passwordVerifyController;
@@ -37,6 +37,17 @@ class AuthController extends GetxController {
     ever(firebaseUser, _setInitialScreen);
   }
 
+  _updateInfor(UserInfor userInfor) async {
+    try {
+      showLoading();
+      await firestore
+          .collection("users")
+          .doc(userInfor.uid)
+          .set(userInfor.toJson());
+    } catch (e) {}
+    dismissLoadingWidget();
+  }
+
   _setInitialScreen(User user) async {
     if (user == null) {
       Get.offAllNamed("/login");
@@ -44,7 +55,10 @@ class AuthController extends GetxController {
       if (!_isActive) {
         _isActive = true;
         await userCheckDatabase(user).then((value) {
-          userInfor = value;
+          userInfor = Rx<UserInfor>(value);
+          userInfor.update((val) {
+            _updateInfor(val);
+          });
           Get.offAllNamed("/home");
         });
       }
@@ -71,8 +85,9 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       dismissLoadingWidget();
       showSnackbar("Sign Up Failed", "Email or Password not valid", false);
+      return;
     }
-
+    dismissLoadingWidget();
     Get.offAllNamed("/home");
   }
 

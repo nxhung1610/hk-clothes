@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 import 'package:image_picker/image_picker.dart';
-
-
 
 class UpdateInfoController extends GetxController
     with SingleGetTickerProviderMixin {
@@ -15,9 +14,6 @@ class UpdateInfoController extends GetxController
     if (pickedFile != null) {
       selectedImagePath.value = pickedFile.path;
     } else
-      Get.snackbar("Error", "No image selected",
-          snackPosition: SnackPosition.BOTTOM);
+      showSnackbar("Error", "No image selected", false);
   }
-
-
 }
