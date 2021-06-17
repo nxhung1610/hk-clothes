@@ -14,7 +14,7 @@ class DashboardController extends GetxController {
   final List<Widget> pageList = [
     HomePage(),
     SearchPage(),
-    BagPage(),
+    ShippingPage(),
     AccountPage(),
   ];
 
