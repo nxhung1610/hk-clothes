@@ -30,88 +30,96 @@ class EditProfilePage extends StatelessWidget {
           color: AppColors.app[550],
           child: Container(
             color: Colors.white,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                EditProfile(
-                    title: "Change your photo",
-                    value: authController.userInfor.value.photoUrl,
-                    widget: Container(
-                        width: 60.0,
-                        height: 60.0,
-                        decoration: new BoxDecoration(
-                            color: AppColors.app.shade400,
-                            shape: BoxShape.circle,
-                            image: new DecorationImage(
-                                fit: BoxFit.fill,
-                                image: new AssetImage(
-                                    'assets/images/logo_splash.png')))),
-                    function: 1),
-                Divider(thickness: 2),
-                EditProfile(
-                  title: "First Name",
-                  value: authController.userInfor.value.firstName,
-                  widget: Text(authController.userInfor.value.firstName,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: AppColors.app[500],
-                          fontWeight: FontWeight.bold)),
-                  function: 2,
-                ),
-                Divider(thickness: 2),
-                EditProfile(
-                    title: "Last Name",
-                    value: authController.userInfor.value.lastName,
-                    widget: Text(authController.userInfor.value.lastName,
+            child: Obx(
+              () => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  EditProfile(
+                      title: "Change your photo",
+                      value: authController.userInfor.value.photoUrl,
+                      widget: Container(
+                          width: 60.0,
+                          height: 60.0,
+                          decoration: BoxDecoration(
+                              color: AppColors.app.shade200,
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: authController
+                                          .userInfor.value.photoUrl.isNotEmpty
+                                      ? NetworkImage(authController
+                                          .userInfor.value.photoUrl)
+                                      : AssetImage(
+                                          'assets/images/logo_splash.png')))),
+                      function: 1),
+                  Divider(thickness: 2),
+                  EditProfile(
+                    title: "First Name",
+                    value: authController.userInfor.value.firstName,
+                    widget: Text(authController.userInfor.value.firstName,
                         style: TextStyle(
                             fontSize: 18,
                             color: AppColors.app[500],
                             fontWeight: FontWeight.bold)),
-                    function: 3),
-                Divider(thickness: 2),
-                EditProfile(
-                    title: "Nickname",
-                    value: authController.userInfor.value.nickname,
-                    widget: Text(authController.userInfor.value.nickname,
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: AppColors.app[500],
-                            fontWeight: FontWeight.bold)),
-                    function: 4),
-                Divider(thickness: 2),
-                EditProfile(
-                    title: "Gender",
-                    value: authController.userInfor.value.gender,
-                    widget: Text(authController.userInfor.value.gender,
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: AppColors.app[500],
-                            fontWeight: FontWeight.bold)),
-                    function: 5),
-                Divider(thickness: 2),
-                EditProfile(
-                    title: "Birthday",
-                    value: authController.userInfor.value.birthday,
-                    widget: Text(authController.userInfor.value.birthday,
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: AppColors.app[500],
-                            fontWeight: FontWeight.w600)),
-                    function: 6),
-                Divider(thickness: 2),
-                Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Text(
-                            "Done",
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        )))
-              ],
+                    function: 2,
+                  ),
+                  Divider(thickness: 2),
+                  EditProfile(
+                      title: "Last Name",
+                      value: authController.userInfor.value.lastName,
+                      widget: Text(authController.userInfor.value.lastName,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: AppColors.app[500],
+                              fontWeight: FontWeight.bold)),
+                      function: 3),
+                  Divider(thickness: 2),
+                  EditProfile(
+                      title: "Nickname",
+                      value: authController.userInfor.value.nickname,
+                      widget: Text(authController.userInfor.value.nickname,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: AppColors.app[500],
+                              fontWeight: FontWeight.bold)),
+                      function: 4),
+                  Divider(thickness: 2),
+                  EditProfile(
+                      title: "Gender",
+                      value: authController.userInfor.value.gender,
+                      widget: Text(authController.userInfor.value.gender,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: AppColors.app[500],
+                              fontWeight: FontWeight.bold)),
+                      function: 5),
+                  Divider(thickness: 2),
+                  EditProfile(
+                      title: "Birthday",
+                      value: authController.userInfor.value.birthday,
+                      widget: Text(authController.userInfor.value.birthday,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: AppColors.app[500],
+                              fontWeight: FontWeight.w600)),
+                      function: 6),
+                  Divider(thickness: 2),
+                  Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.all(10),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            authController.signOut();
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Text(
+                              "Logout",
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          )))
+                ],
+              ),
             ),
           ),
         ),

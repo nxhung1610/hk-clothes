@@ -11,6 +11,10 @@ class DashboardController extends GetxController {
 
   RxInt selectItemBottom = 0.obs;
 
+  reloadData() {
+    selectItemBottom.value = 0;
+  }
+
   final List<Widget> pageList = [
     HomePage(),
     SearchPage(),

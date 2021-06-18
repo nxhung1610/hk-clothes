@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/models/user_infor.dart';
 import 'package:hk_clothes/utils/helpers/show_loading.dart';
@@ -44,7 +45,9 @@ class AuthController extends GetxController {
           .collection("users")
           .doc(userInfor.uid)
           .set(userInfor.toJson());
-    } catch (e) {}
+    } catch (e) {
+      showSnackbar("Update Profile", "Failed to update", false);
+    }
     dismissLoadingWidget();
   }
 
@@ -53,12 +56,11 @@ class AuthController extends GetxController {
       Get.offAllNamed("/login");
     } else {
       if (!_isActive) {
+        dashBoardController.reloadData();
         _isActive = true;
         await userCheckDatabase(user).then((value) {
-          userInfor = Rx<UserInfor>(value);
-          userInfor.update((val) {
-            _updateInfor(val);
-          });
+          userInfor = value.obs;
+          ever(userInfor, _updateInfor);
           Get.offAllNamed("/home");
         });
       }
@@ -163,5 +165,6 @@ class AuthController extends GetxController {
   Future signOut() async {
     firebaseAuth.signOut();
     firebaseUser = null;
+    _isActive = false;
   }
 }

@@ -10,6 +10,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     SnakeShape snakeShape = SnakeShape(
         padding: EdgeInsets.all(5),
         centered: true,

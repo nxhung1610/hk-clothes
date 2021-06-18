@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +8,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/account/updateinfo_controller.dart';
+import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -16,10 +20,9 @@ class UpdateInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     var param = Get.arguments;
     final controller = TextEditingController();
-    DateTime currentDate = DateTime.now();
-    String groupValue = '';
+    DateTime currentDate;
 
-    Future<void> _selectDate(BuildContext context) async {
+    Future<void> _selectDate() async {
       final DateTime pickedDate = await showDatePicker(
           context: context,
           initialDate: currentDate,
@@ -36,20 +39,26 @@ class UpdateInfo extends StatelessWidget {
     Widget input(BuildContext context, int type, String value) {
       switch (type) {
         case 1:
-          return Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: InkWell(
-              onTap: () {
-                updateInfoController.getImage(ImageSource.gallery);
-              },
-              child: CircleAvatar(
-                  radius: 100,
-                  backgroundImage: authController
-                          .userInfor.value.photoUrl.isEmpty
-                      ? AssetImage('assets/images/logo_splash.png')
-                      : NetworkImage(authController.userInfor.value.photoUrl)),
-            ),
-          );
+          return Obx(() {
+            return Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: InkWell(
+                onTap: () {
+                  updateInfoController.getImage(ImageSource.gallery);
+                },
+                child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: updateInfoController
+                                .selectedImage.value.length !=
+                            0
+                        ? MemoryImage(updateInfoController.selectedImage.value)
+                        : authController.userInfor.value.photoUrl.isEmpty
+                            ? AssetImage('assets/images/logo_splash.png')
+                            : NetworkImage(
+                                authController.userInfor.value.photoUrl)),
+              ),
+            );
+          });
           break;
         default:
           controller.text = value;
@@ -58,39 +67,68 @@ class UpdateInfo extends StatelessWidget {
             onTap: () {
               switch (type) {
                 case 6:
-                  _selectDate(context);
+                  try {
+                    currentDate = DateTime.parse(param[2]);
+                  } catch (e) {
+                    currentDate = DateTime.now();
+                  }
+                  _selectDate();
                   break;
                 case 5:
                   Get.defaultDialog(
                     title: "Choose Gender",
                     barrierDismissible: true,
-                    content: Column(
-                      children: <Widget>[
-                        ListTile(
-                          title: const Text('male'),
-                          leading: Radio(
-                              value: 'Male',
-                              groupValue: groupValue,
-                              onChanged: (val) {
-                                groupValue = val;
-                              }),
-                        ),
-                        ListTile(
-                          title: const Text('female'),
-                          leading: Radio(
-                            value: 'Female',
-                            groupValue: groupValue,
-                            onChanged: (val) {
-                              groupValue = val;
-                            },
+                    content: Obx(
+                      () => Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              Radio(
+                                  activeColor: AppColors.app.shade400,
+                                  value: Gender.male,
+                                  groupValue:
+                                      updateInfoController.groupValue.value,
+                                  onChanged: (val) {
+                                    updateInfoController.groupValue.value =
+                                        Gender.male;
+                                  }),
+                              Text("Male"),
+                            ],
                           ),
-                        ),
-                      ],
+                          Row(
+                            children: [
+                              Radio(
+                                  activeColor: AppColors.app.shade400,
+                                  value: Gender.female,
+                                  groupValue:
+                                      updateInfoController.groupValue.value,
+                                  onChanged: (val) {
+                                    updateInfoController.groupValue.value =
+                                        Gender.female;
+                                  }),
+                              Text("Female"),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     textCancel: "Cancel",
                     textConfirm: "OK",
-                    onCancel: () {},
-                    onConfirm: () {},
+                    onCancel: () {
+                      updateInfoController.groupValue.value =
+                          authController.userInfor.value.gender == 'male'
+                              ? Gender.male
+                              : Gender.female;
+                    },
+                    onConfirm: () {
+                      controller.text = updateInfoController.groupValue.value
+                          .toString()
+                          .split('.')
+                          .last;
+                      Get.back();
+                    },
                   );
 
                   break;
@@ -122,6 +160,12 @@ class UpdateInfo extends StatelessWidget {
                 fontSize: 22,
                 fontWeight: FontWeight.bold),
           ),
+          leading: IconButton(
+              onPressed: () {
+                updateInfoController.selectedImage.value = Uint8List(0);
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back)),
         ),
         body: Container(
           color: AppColors.app[550],
@@ -132,19 +176,63 @@ class UpdateInfo extends StatelessWidget {
                   width: double.infinity,
                   margin: EdgeInsets.all(10),
                   child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         switch (param[1]) {
                           case 1:
-                            break;
+                            if (updateInfoController
+                                    .selectedImage.value.length !=
+                                0) {
+                              String url =
+                                  await updateInfoController.uploadAvatar();
+                              Get.back();
+                              if (url != null) {
+                                authController.userInfor.value.photoUrl = url;
+
+                                showSnackbar("Upload Avatar",
+                                    "Success upload Avatar", true);
+                              } else
+                                showSnackbar(
+                                    "Upload Avatar", "Failed to upload", false);
+                            }
+
+                            continue update;
                           case 2:
-                            break;
+                            authController.userInfor.value.firstName =
+                                controller.text;
+                            Get.back();
+                            continue update;
                           case 3:
-                            break;
+                            authController.userInfor.value.lastName =
+                                controller.text;
+                            Get.back();
+                            continue update;
+
                           case 4:
-                            break;
+                            authController.userInfor.value.nickname =
+                                controller.text;
+                            Get.back();
+                            continue update;
+
                           case 5:
-                            break;
+                            authController.userInfor.value.gender =
+                                updateInfoController.groupValue.value
+                                    .toString()
+                                    .split('.')
+                                    .last;
+                            Get.back();
+                            continue update;
                           case 6:
+                            authController.userInfor.value.birthday =
+                                controller.text;
+                            Get.back();
+                            continue update;
+
+                          update:
+                          default:
+                            authController.userInfor.refresh();
+                            updateInfoController.selectedImage.value =
+                                Uint8List(0);
+
                             break;
                         }
                       },

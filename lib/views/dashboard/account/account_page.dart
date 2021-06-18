@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,58 +31,62 @@ class AccountPage extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 15 , vertical:  10),
-                  child: Container(
-                      width: 90.0,
-                      height: 90.0,
-                      decoration: new BoxDecoration(
-                          color: AppColors.app.shade400,
-                          shape: BoxShape.circle,
-                          image: new DecorationImage(
-                              fit: BoxFit.fill,
-                              image: new AssetImage(
-                                  'assets/images/logo_splash.png')))),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'USER NAME HERE',
-                        style:
-                            TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 5),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed("/editprofile");
-                          },
-                        child: Text(
-                          'Edit Profile',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
+            Obx(
+              () => Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    child: Container(
+                        width: 90.0,
+                        height: 90.0,
+                        decoration: BoxDecoration(
+                            color: AppColors.app.shade200,
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: authController
+                                        .userInfor.value.photoUrl.isNotEmpty
+                                    ? NetworkImage(
+                                        authController.userInfor.value.photoUrl)
+                                    : AssetImage(
+                                        'assets/images/logo_splash.png')))),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          authController.userInfor.value.nickname,
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed("/editprofile");
+                          },
+                          child: Text(
+                            'Edit Profile',
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 15),
               child: Card(
-                
                 child: Padding(
-                  padding:EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,7 +98,7 @@ class AccountPage extends StatelessWidget {
                         child: SizedBox(
                           width: 100,
                           child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 '0',

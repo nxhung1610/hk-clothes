@@ -69,11 +69,15 @@ class MyApp extends StatelessWidget {
           page: () => SplashScreen(),
         ),
         GetPage(
-            name: '/editprofile',
-            page: () => EditProfilePage()),
+          name: '/editprofile',
+          page: () => EditProfilePage(),
+        ),
         GetPage(
-            name: '/updateinfo',
-            page: () => UpdateInfo()),
+          name: '/updateinfo',
+          page: () => UpdateInfo(),
+          transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 200),
+        ),
         GetPage(
           name: "/product",
           page: () => ProductPage(),
