@@ -25,13 +25,16 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     if (homeController.listProductTrending.length == 0)
-      homeController.fetchProductsTrending();
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => homeController.fetchProductsTrending());
+
     _controller.addListener(_onScroll);
 
     return RefreshIndicator(
       onRefresh: () async {
         homeController.refreshDataHomeTab();
-        homeController.fetchProductsTrending();
+        WidgetsBinding.instance.addPostFrameCallback(
+            (_) => homeController.fetchProductsTrending());
       },
       child: SingleChildScrollView(
         controller: _controller,
@@ -84,7 +87,9 @@ class HomeTab extends StatelessWidget {
                   () => !homeController.isLoadingTrending.value
                       ? ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          itemCount: homeController.listProductTrending.length,
+                          itemCount: homeController.listProductTrending != null
+                              ? homeController.listProductTrending.length
+                              : 0,
                           itemBuilder: (context, index) => ProductItem(
                             size: size.width * (1 / 3),
                             clothes: homeController.listProductTrending[index],
@@ -127,12 +132,18 @@ class HomeTab extends StatelessWidget {
                           mainAxisSpacing: 5,
                           crossAxisSpacing: 5,
                         ),
-                        itemCount: homeController.listProductRecommand.length,
-                        itemBuilder: (context, index) => ProductItem(
-                          size: size.width * (1 / 3),
-                          clothes: homeController.listProductRecommand[index],
-                          function: productController.showInforItem,
-                        ),
+                        itemCount: homeController.listProductRecommand != null
+                            ? homeController.listProductRecommand.length
+                            : 0,
+                        itemBuilder: (context, index) {
+                          // print(homeController.listProductRecommand[index]
+                          //     .toJson());
+                          return ProductItem(
+                            size: size.width * (1 / 3),
+                            clothes: homeController.listProductRecommand[index],
+                            function: productController.showInforItem,
+                          );
+                        },
                       ),
                     )
                   : Container(),

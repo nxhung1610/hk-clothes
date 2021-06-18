@@ -11,6 +11,7 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Product product = Get.arguments[0];
+    final tag = Get.arguments[1];
     final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -44,9 +45,12 @@ class ProductPage extends StatelessWidget {
             Container(
               width: size.width,
               height: size.height * 0.7,
-              child: CachedNetworkImage(
-                imageUrl: product.imageUrl,
-                fit: BoxFit.fill,
+              child: Hero(
+                tag: tag,
+                child: CachedNetworkImage(
+                  imageUrl: product.imageUrl,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ],

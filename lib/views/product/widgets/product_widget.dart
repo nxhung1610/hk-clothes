@@ -5,6 +5,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/assets.dart';
 import 'package:hk_clothes/models/product/product.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductItem extends StatelessWidget {
   final size;
@@ -19,6 +20,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tag = Uuid().v1();
     final _image = CachedNetworkImage(
       fit: BoxFit.fill,
       imageUrl: clothes.imageUrl,
@@ -57,7 +59,7 @@ class ProductItem extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      child: _image,
+                      child: Hero(tag: tag, child: _image),
                     ),
                   ),
                   SizedBox(
@@ -80,7 +82,7 @@ class ProductItem extends StatelessWidget {
                 child: InkWell(
                   splashColor: AppColors.app[500].withOpacity(0.2),
                   splashFactory: InkRipple.splashFactory,
-                  onTap: () => function(clothes),
+                  onTap: () => function(clothes, tag),
                 ),
               ),
             ),

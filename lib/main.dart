@@ -6,6 +6,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
+import 'package:hk_clothes/controllers/product/product_controller.dart';
 import 'package:hk_clothes/views/dashboard/account/editprofile/editprofile_page.dart';
 import 'package:hk_clothes/views/dashboard/account/editprofile/updateinfo.dart';
 
@@ -13,7 +14,6 @@ import 'package:hk_clothes/views/dashboard/dashboard_page.dart';
 import 'package:hk_clothes/views/product/product_page.dart';
 import 'package:hk_clothes/views/splash/splash.dart';
 
-import 'controllers/clothes/product_controller.dart';
 import 'controllers/dashboard/account/account_controller.dart';
 import 'controllers/dashboard/account/updateinfo_controller.dart';
 import 'controllers/dashboard/dashboard_controller.dart';
@@ -76,13 +76,13 @@ class MyApp extends StatelessWidget {
           name: '/updateinfo',
           page: () => UpdateInfo(),
           transition: Transition.rightToLeft,
-          transitionDuration: Duration(milliseconds: 200),
+          transitionDuration: Duration(milliseconds: 300),
         ),
         GetPage(
           name: "/product",
           page: () => ProductPage(),
           transition: Transition.rightToLeft,
-          transitionDuration: Duration(milliseconds: 200),
+          transitionDuration: Duration(milliseconds: 300),
         ),
       ],
       initialRoute: "/splash",

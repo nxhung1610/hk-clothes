@@ -41,6 +41,15 @@ dependencies:
   shimmer: ^2.0.0
   cached_network_image: ^3.0.0
   image_picker: ^0.8.0+3
+  #splash screen 
+  flutter_native_splash: ^1.2.0 
+
+flutter_native_splash:
+  image: assets/images/logo_splash.png
+  color: "#ffffff"
+  android: true
+  android_gravity: center
+  
 
 dev_dependencies:
   flutter_test:

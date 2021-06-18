@@ -31,56 +31,54 @@ class AccountPage extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Obx(
-              () => Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    child: Container(
-                        width: 90.0,
-                        height: 90.0,
-                        decoration: BoxDecoration(
-                            color: AppColors.app.shade200,
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: authController
-                                        .userInfor.value.photoUrl.isNotEmpty
-                                    ? NetworkImage(
-                                        authController.userInfor.value.photoUrl)
-                                    : AssetImage(
-                                        'assets/images/logo_splash.png')))),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          authController.userInfor.value.nickname,
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Container(
+                      width: 90.0,
+                      height: 90.0,
+                      decoration: BoxDecoration(
+                          color: AppColors.app.shade200,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: authController
+                                      .userInfor.value.photoUrl.isNotEmpty
+                                  ? NetworkImage(
+                                      authController.userInfor.value.photoUrl)
+                                  : AssetImage(
+                                      'assets/images/logo_splash.png')))),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        authController.userInfor.value.nickname,
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 5),
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed("/editprofile");
+                        },
+                        child: Text(
+                          'Edit Profile',
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed("/editprofile");
-                          },
-                          child: Text(
-                            'Edit Profile',
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 15),
