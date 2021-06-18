@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hk_clothes/views/dashboard/shipping/widgets/shippingproduct.dart';
+import 'package:hk_clothes/views/dashboard/shipping/widgets/shippingcard_widget.dart';
 
 class ShippingTab extends StatelessWidget {
   const ShippingTab({Key key}) : super(key: key);
@@ -7,9 +7,9 @@ class ShippingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(scrollDirection: Axis.vertical,
-        itemCount: 1,
+        itemCount:3,
         itemBuilder: (BuildContext context, int index) {
-      return ShippingProduct(productID: 'productID', productName: 'productName', productPrice: 'productPrice');
+      return ShippingProduct();
 
     });
   }
