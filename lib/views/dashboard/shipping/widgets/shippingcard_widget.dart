@@ -12,9 +12,10 @@ class ShippingProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         color: Colors.white,
-        elevation: 5,
+        elevation: 0,
         child: Container(
-          padding: EdgeInsets.all(10),
+
+          padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
