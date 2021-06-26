@@ -6,6 +6,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
+import 'package:hk_clothes/controllers/dashboard/search/search_controller.dart';
 
 import 'package:hk_clothes/controllers/product/product_controller.dart';
 
@@ -21,6 +22,7 @@ import 'package:hk_clothes/views/splash/splash.dart';
 
 import 'controllers/dashboard/account/account_controller.dart';
 import 'controllers/dashboard/account/updateinfo_controller.dart';
+import 'controllers/dashboard/category/category_controller.dart';
 import 'controllers/dashboard/dashboard_controller.dart';
 import 'views/authentication/login_page.dart';
 import 'views/authentication/register_page.dart';
@@ -38,6 +40,8 @@ Future main() async {
     Get.put(AccountController());
     Get.put(UpdateInfoController());
     Get.put(ShippingController());
+    Get.put(CategoryController());
+    Get.put(SearchController());
   });
   runApp(MyApp());
 }
@@ -84,6 +88,10 @@ class MyApp extends StatelessWidget {
           transition: Transition.rightToLeft,
           transitionDuration: Duration(milliseconds: 300),
         ),
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/refactor
         GetPage(
           name: "/product",
           page: () => ProductPage(),
