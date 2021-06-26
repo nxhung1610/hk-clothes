@@ -10,27 +10,29 @@ class CategoryPage extends StatelessWidget {
 
   const CategoryPage({Key key, @required this.categoryItem}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       bottom: false,
       top: true,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {categoryController.scrollUp();},
+          elevation: 0,
+          hoverElevation: 0,
+          focusElevation: 0,
+          highlightElevation: 0,
+          onPressed: () {
+            categoryController.scrollUp();
+          },
           child: Icon(Icons.arrow_upward_sharp),
-          backgroundColor: Colors.black12.withOpacity(0.5),
+          backgroundColor: AppColors.app.shade500,
         ),
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
           actions: [
             IconButton(
-              onPressed: (){
-
-              },
+              onPressed: () {},
               icon: Icon(
                 Icons.shopping_bag,
                 color: AppColors.app[400],
@@ -78,7 +80,4 @@ class CategoryPage extends StatelessWidget {
       ),
     );
   }
-
-
-
 }

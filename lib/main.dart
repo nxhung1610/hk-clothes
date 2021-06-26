@@ -88,10 +88,6 @@ class MyApp extends StatelessWidget {
           transition: Transition.rightToLeft,
           transitionDuration: Duration(milliseconds: 300),
         ),
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/refactor
         GetPage(
           name: "/product",
           page: () => ProductPage(),
