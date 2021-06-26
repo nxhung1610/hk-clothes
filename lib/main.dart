@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: "UbuntuMono",
+        fontFamily: "Quicksand",
         primaryColor: AppColors.app,
         primarySwatch: AppColors.app,
         bottomSheetTheme: BottomSheetThemeData(
@@ -84,7 +84,6 @@ class MyApp extends StatelessWidget {
           transition: Transition.rightToLeft,
           transitionDuration: Duration(milliseconds: 300),
         ),
-        GetPage(name: '/shipping', page: () => ShippingPage()),
         GetPage(
           name: "/product",
           page: () => ProductPage(),

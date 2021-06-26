@@ -25,8 +25,8 @@ class ProductItem extends StatelessWidget {
       fit: BoxFit.fill,
       imageUrl: clothes.imageUrl,
       placeholder: (context, url) => Shimmer.fromColors(
-        baseColor: Colors.grey[100],
-        highlightColor: Colors.white,
+        baseColor: AppColors.app[550],
+        highlightColor: Colors.grey[100],
         child: Stack(
           children: [
             Positioned.fill(

@@ -3,6 +3,7 @@ class Product {
   String productName;
   String type;
   String imageUrl;
+  String description;
   double price;
 
   Product({this.pid, this.productName, this.type, this.price});
@@ -13,6 +14,7 @@ class Product {
     type = json['type'];
     price = json['price'];
     imageUrl = json['image_url'];
+    description = json['description'];
   }
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class Product {
     data['type'] = this.type;
     data['price'] = this.price;
     data['image_url'] = this.imageUrl;
+    data['description'] = this.description;
     return data;
   }
 }
