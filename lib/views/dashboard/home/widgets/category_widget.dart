@@ -43,7 +43,11 @@ class CategoryItem extends StatelessWidget {
               child: InkWell(
                 splashColor: AppColors.app[500].withOpacity(0.2),
                 splashFactory: InkRipple.splashFactory,
-                onTap: () {Get.to(CategoryPage(categoryItem: categoryItem,));},
+                onTap: () {
+                  Get.to(() => CategoryPage(
+                        categoryItem: categoryItem,
+                      ));
+                },
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
             ),
