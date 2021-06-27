@@ -60,7 +60,7 @@ class ProductController extends GetxController {
         .get();
     productDetail.sizes =
         size.docs.map((e) => ProductSize.fromJson(e.data())).toList();
-
+    productDetail.sizes.sort((a, b) => a.sid.compareTo(b.sid));
     var sale = await firestore
         .collection("shopstore")
         .doc("products")

@@ -8,6 +8,7 @@ class ProductSize {
   ProductSize.fromJson(Map<String, dynamic> json) {
     pid = json['pid'];
     sid = json['sid'];
+    psid = json['psid'];
   }
 
   Map<String, dynamic> toJson() {

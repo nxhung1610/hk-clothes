@@ -24,12 +24,14 @@ class ProductPage extends StatelessWidget {
     }
 
     productController.controller.value.addListener(_onScroll);
-
+    Rx<SizeProduct> select = SizeProduct().obs;
     Rx<ProductDetail> productDetail = ProductDetail().obs;
-    productController
-        .getProductDetail(product.pid)
-        .then((value) => productDetail.value = value);
-    Rx<SizeProduct> select = productController.sizes[0].obs;
+    productController.getProductDetail(product.pid).then((value) {
+      productDetail.value = value;
+      select.value = productController.sizes
+          .where((e) => e.sid == productDetail.value.sizes.first.sid)
+          .first;
+    });
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -78,6 +80,9 @@ class ProductPage extends StatelessWidget {
                     },
                   ),
                 ),
+              ),
+              SizedBox(
+                width: 5,
               ),
             ],
           ),
@@ -163,8 +168,13 @@ class ProductPage extends StatelessWidget {
                                       ? 0
                                       : productDetail.value.sizes.length,
                                   itemBuilder: (context, index) {
-                                    SizeProduct sizeItem =
-                                        productController.sizes[index];
+                                    SizeProduct sizeItem = productController
+                                        .sizes
+                                        .where((e) =>
+                                            e.sid ==
+                                            productDetail
+                                                .value.sizes[index].sid)
+                                        .first;
 
                                     return Obx(() => GestureDetector(
                                           onTap: () => select.value = sizeItem,
@@ -189,9 +199,7 @@ class ProductPage extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                productController
-                                                    .sizes[index].sizeName
-                                                    .toString(),
+                                                sizeItem.sizeName.toString(),
                                                 style: TextStyle(
                                                   fontWeight: sizeItem.sid ==
                                                           select.value.sid

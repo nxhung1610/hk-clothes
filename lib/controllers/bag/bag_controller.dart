@@ -26,6 +26,11 @@ class BagController extends GetxController {
 
   Future addProductBag(ProductBag productBag) async {
     showLoading();
+    if (productBag.sid == null) {
+      dismissLoadingWidget();
+      showSnackbar("Add Bag", "Please select Size Product", false);
+      return;
+    }
     var n =
         bag.value.productBags.where((element) => element.pid == productBag.pid);
     if (n.length == 0)
