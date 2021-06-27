@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
@@ -18,9 +19,10 @@ class ProductbagItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tag = Uuid().v1();
+    Rx<ProductBag> finalProductBag = productBag.obs;
     Rx<ProductDetail> productDetail = ProductDetail().obs;
     Rx<SizeProduct> select = SizeProduct().obs;
-    productController.getProductDetail(productBag.pid).then((value) {
+    productController.getProductDetail(finalProductBag.value.pid).then((value) {
       productDetail.value = value;
       select.value = productController.sizes
           .where((e) => e.sid == productDetail.value.sizes[0].sid)
@@ -73,85 +75,140 @@ class ProductbagItem extends StatelessWidget {
               ),
             ),
     );
+
     return Obx(() => productDetail.value.item != null
         ? Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             height: 150,
             width: double.infinity,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 100,
-                  child: _image,
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              productDetail.value.item.productName,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18,
-                                color: AppColors.app.shade400,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "${productDetail.value.item.price.toInt()} VNĐ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18,
-                                color: AppColors.app.shade100,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: AppColors.app.shade400,
-                              ),
-                              child: Text(
-                                "${select.value.sizeName}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 18,
-                                  color: AppColors.app.shade200,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuButton<MenuItem>(
-                        offset: Offset(-10, 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        onSelected: (value) {},
-                        itemBuilder: (context) =>
-                            MenuItems.listMenu.map(buillMenuItem).toList(),
-                      ),
-                    ],
+            child: IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    width: 100,
+                    child: _image,
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.topLeft,
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    productDetail.value.item.productName,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 18,
+                                      color: AppColors.app.shade400,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "${productDetail.value.item.price.toInt()} VNĐ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 18,
+                                      color: AppColors.app.shade100,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: AppColors.app.shade400,
+                                    ),
+                                    child: Text(
+                                      "${select.value.sizeName}",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 18,
+                                        color: AppColors.app.shade200,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          IconButton(
+                                            splashColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              FontAwesomeIcons.minus,
+                                              color: AppColors.app.shade400,
+                                              size: 15,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            finalProductBag.value.number
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          IconButton(
+                                            splashColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              FontAwesomeIcons.plus,
+                                              color: AppColors.app.shade400,
+                                              size: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          PopupMenuButton<MenuItem>(
+                            offset: Offset(-10, 40),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            onSelected: (value) {},
+                            itemBuilder: (context) =>
+                                MenuItems.listMenu.map(buillMenuItem).toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         : ShimmerProductBagItem());

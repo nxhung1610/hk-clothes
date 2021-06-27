@@ -44,6 +44,9 @@ dependencies:
   #splash screen 
   flutter_native_splash: ^1.2.0 
 
+  #
+  font_awesome_flutter: ^9.1.0
+
 flutter_native_splash:
   image: assets/images/logo_splash.png
   color: "#ffffff"
