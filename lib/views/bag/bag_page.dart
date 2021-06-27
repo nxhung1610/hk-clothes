@@ -69,12 +69,15 @@ class BagPage extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: bagController.bag.value.productBags.length,
-                      itemBuilder: (context, index) => ProductbagItem(
-                        productBag: bagController.bag.value.productBags[index],
+                    Obx(
+                      () => ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: bagController.bag.value.productBags.length,
+                        itemBuilder: (context, index) => ProductbagItem(
+                          productBag:
+                              bagController.bag.value.productBags[index],
+                        ),
                       ),
                     )
                   ],

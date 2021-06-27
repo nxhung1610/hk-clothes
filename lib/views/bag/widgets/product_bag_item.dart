@@ -25,7 +25,7 @@ class ProductbagItem extends StatelessWidget {
     productController.getProductDetail(finalProductBag.value.pid).then((value) {
       productDetail.value = value;
       select.value = productController.sizes
-          .where((e) => e.sid == productDetail.value.sizes[0].sid)
+          .where((e) => e.sid == finalProductBag.value.sid)
           .first;
     });
     final _image = Obx(
