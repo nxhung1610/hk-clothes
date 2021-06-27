@@ -8,52 +8,67 @@ import 'package:hk_clothes/models/product/product_detail.dart';
 import 'package:hk_clothes/models/product/size.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final Product product = Get.arguments[0];
     final tag = Get.arguments[1];
     final size = MediaQuery.of(context).size;
+    RxDouble opacity = 0.0.obs;
+    _onScroll() {
+      if (productController.controller.value.offset < size.height * 0.5) {
+        opacity.value =
+            (productController.controller.value.offset / (size.height * 0.5));
+      } else
+        opacity.value = 1.0;
+    }
+
+    productController.controller.value.addListener(_onScroll);
+
     Rx<ProductDetail> productDetail = ProductDetail().obs;
     productController
         .getProductDetail(product)
         .then((value) => productDetail.value = value);
-    Rx<Size> select = productController.sizes[0].obs;
+    Rx<SizeProduct> select = productController.sizes[0].obs;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: Container(
-          width: 25,
-          height: 25,
-          padding: EdgeInsets.all(5),
-          child: Ink(
-            decoration: ShapeDecoration(
-              color: Colors.white.withOpacity(0.2),
-              shape: CircleBorder(),
-            ),
-            child: IconButton(
-              splashRadius: 25,
-              icon: Icon(
-                Icons.arrow_back,
-                color: AppColors.app[100],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size.height * 0.075),
+        child: Obx(
+          () => AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white.withOpacity(opacity.value),
+            leading: Container(
+              width: 25,
+              height: 25,
+              padding: EdgeInsets.all(5),
+              child: Ink(
+                decoration: ShapeDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  splashRadius: 25,
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.app[100],
+                  ),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
               ),
-              onPressed: () {
-                Get.back();
-              },
             ),
+            actions: [],
           ),
         ),
-        actions: [],
       ),
       body: Column(
         children: [
           Flexible(
             fit: FlexFit.tight,
             child: SingleChildScrollView(
+              controller: productController.controller.value,
               physics: AlwaysScrollableScrollPhysics(),
               child: Container(
                 color: AppColors.app[550],
@@ -128,7 +143,7 @@ class ProductPage extends StatelessWidget {
                                       ? 0
                                       : productDetail.value.sizes.length,
                                   itemBuilder: (context, index) {
-                                    Size sizeItem =
+                                    SizeProduct sizeItem =
                                         productController.sizes[index];
 
                                     return Obx(() => GestureDetector(

@@ -6,6 +6,6 @@ import 'package:hk_clothes/models/product/size.dart';
 class ProductDetail {
   Product item;
   List<ProductSize> sizes;
-  Size selectSize;
+  SizeProduct selectSize;
   ProductSale sale;
 }

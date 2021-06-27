@@ -1,10 +1,10 @@
-class Size {
+class SizeProduct {
   String sid;
   String sizeName;
 
-  Size({this.sid, this.sizeName});
+  SizeProduct({this.sid, this.sizeName});
 
-  Size.fromJson(Map<String, dynamic> json) {
+  SizeProduct.fromJson(Map<String, dynamic> json) {
     sid = json['size_id'];
     sizeName = json['size_name'];
   }

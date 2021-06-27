@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/models/product/product.dart';
@@ -8,8 +9,8 @@ import 'package:hk_clothes/models/product/size.dart';
 
 class ProductController extends GetxController {
   static ProductController instance = Get.find();
-  RxList<Size> sizes = <Size>[].obs;
-
+  RxList<SizeProduct> sizes = <SizeProduct>[].obs;
+  Rx<ScrollController> controller = ScrollController().obs;
   @override
   void onInit() {
     super.onInit();
@@ -23,7 +24,7 @@ class ProductController extends GetxController {
         .collection("size")
         .get()
         .then((value) => sizes.value =
-            value.docs.map((e) => Size.fromJson(e.data())).toList());
+            value.docs.map((e) => SizeProduct.fromJson(e.data())).toList());
     super.onReady();
   }
 
