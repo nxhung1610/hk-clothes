@@ -15,7 +15,7 @@ class CategoryItem extends StatelessWidget {
       elevation: 1,
       color: Colors.grey[200],
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Stack(
         children: [
@@ -31,7 +31,7 @@ class CategoryItem extends StatelessWidget {
                   ),
                   Text(
                     categoryItem.name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,fontSize:16,color:  Colors.grey[600]),
                   ),
                 ],
               ),
