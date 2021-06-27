@@ -12,7 +12,7 @@ class ShippingPage extends StatelessWidget {
       bottom: false,
       top: true,
       child: Scaffold(
-        backgroundColor: Colors.grey[50],
+        backgroundColor: AppColors.app[550],
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 2,

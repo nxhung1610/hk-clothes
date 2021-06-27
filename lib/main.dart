@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
+import 'package:hk_clothes/controllers/bag/bag_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/search/search_controller.dart';
 
 import 'package:hk_clothes/controllers/product/product_controller.dart';
 
 import 'package:hk_clothes/controllers/dashboard/shipping/shipping_controller.dart';
+import 'package:hk_clothes/views/bag/bag_page.dart';
 
 import 'package:hk_clothes/views/dashboard/account/editprofile/editprofile_page.dart';
 import 'package:hk_clothes/views/dashboard/account/editprofile/updateinfo.dart';
@@ -33,10 +35,11 @@ Future main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   await initialization.then((value) {
+    Get.put(BagController());
+    Get.put(ProductController());
     Get.put(AuthController());
     Get.put(DashboardController());
     Get.put(HomeController());
-    Get.put(ProductController());
     Get.put(AccountController());
     Get.put(UpdateInfoController());
     Get.put(ShippingController());
@@ -92,6 +95,12 @@ class MyApp extends StatelessWidget {
           name: "/product",
           page: () => ProductPage(),
           transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 300),
+        ),
+        GetPage(
+          name: "/bag",
+          page: () => BagPage(),
+          transition: Transition.topLevel,
           transitionDuration: Duration(milliseconds: 300),
         ),
       ],

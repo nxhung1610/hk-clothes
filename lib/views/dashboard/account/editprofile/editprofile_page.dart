@@ -23,6 +23,27 @@ class EditProfilePage extends StatelessWidget {
               fontSize: 22,
               fontWeight: FontWeight.bold),
         ),
+        leading: Container(
+          width: 25,
+          height: 25,
+          padding: EdgeInsets.all(5),
+          child: Ink(
+            decoration: ShapeDecoration(
+              color: Colors.white.withOpacity(0.2),
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              splashRadius: 25,
+              icon: Icon(
+                Icons.arrow_back,
+                color: AppColors.app[100],
+              ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+        ),
       ),
       //container , padding , row
       body: SingleChildScrollView(

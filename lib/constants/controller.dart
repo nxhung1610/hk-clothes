@@ -1,4 +1,5 @@
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
+import 'package:hk_clothes/controllers/bag/bag_controller.dart';
 
 import 'package:hk_clothes/controllers/dashboard/account/account_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/account/updateinfo_controller.dart';
@@ -18,5 +19,6 @@ AccountController accountController = AccountController.instance;
 UpdateInfoController updateInfoController = UpdateInfoController.instance;
 ProductController productController = ProductController.instance;
 ShippingController shippingController = ShippingController.instance;
-CategoryController categoryController= CategoryController.instance;
+CategoryController categoryController = CategoryController.instance;
 SearchController searchController = SearchController.instance;
+BagController bagController = BagController.instance;

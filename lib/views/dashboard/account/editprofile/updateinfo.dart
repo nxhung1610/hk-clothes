@@ -160,12 +160,28 @@ class UpdateInfo extends StatelessWidget {
                 fontSize: 22,
                 fontWeight: FontWeight.bold),
           ),
-          leading: IconButton(
-              onPressed: () {
-                updateInfoController.selectedImage.value = Uint8List(0);
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back)),
+          leading: Container(
+            width: 25,
+            height: 25,
+            padding: EdgeInsets.all(5),
+            child: Ink(
+              decoration: ShapeDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                splashRadius: 25,
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.app[100],
+                ),
+                onPressed: () {
+                  updateInfoController.selectedImage.value = Uint8List(0);
+                  Get.back();
+                },
+              ),
+            ),
+          ),
         ),
         body: Container(
           color: AppColors.app[550],

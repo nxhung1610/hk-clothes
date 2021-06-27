@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/models/bag/product_bag.dart';
 import 'package:hk_clothes/models/product/product.dart';
 import 'package:hk_clothes/models/product/product_detail.dart';
 import 'package:hk_clothes/models/product/size.dart';
@@ -15,9 +16,9 @@ class ProductPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     RxDouble opacity = 0.0.obs;
     _onScroll() {
-      if (productController.controller.value.offset < size.height * 0.5) {
+      if (productController.controller.value.offset < size.height * 0.4) {
         opacity.value =
-            (productController.controller.value.offset / (size.height * 0.5));
+            (productController.controller.value.offset / (size.height * 0.4));
       } else
         opacity.value = 1.0;
     }
@@ -26,7 +27,7 @@ class ProductPage extends StatelessWidget {
 
     Rx<ProductDetail> productDetail = ProductDetail().obs;
     productController
-        .getProductDetail(product)
+        .getProductDetail(product.pid)
         .then((value) => productDetail.value = value);
     Rx<SizeProduct> select = productController.sizes[0].obs;
 
@@ -44,7 +45,7 @@ class ProductPage extends StatelessWidget {
               padding: EdgeInsets.all(5),
               child: Ink(
                 decoration: ShapeDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withOpacity(0.3),
                   shape: CircleBorder(),
                 ),
                 child: IconButton(
@@ -59,7 +60,26 @@ class ProductPage extends StatelessWidget {
                 ),
               ),
             ),
-            actions: [],
+            actions: [
+              Container(
+                child: Ink(
+                  decoration: ShapeDecoration(
+                    color: Colors.white.withOpacity(0.4),
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    splashRadius: 25,
+                    icon: Icon(
+                      Icons.shopping_bag,
+                      color: AppColors.app[400],
+                    ),
+                    onPressed: () {
+                      Get.toNamed("/bag");
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -234,7 +254,10 @@ class ProductPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: AppColors.app,
               ),
-              onPressed: () {},
+              onPressed: () {
+                bagController.addProductBag(ProductBag(
+                    pid: product.pid, number: 1, sid: select.value.sid));
+              },
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(

@@ -63,6 +63,8 @@ class AuthController extends GetxController {
           ever(userInfor, _updateInfor);
           dashBoardController = DashboardController.instance;
           dashBoardController.reloadData();
+
+          bagController.fecthBagUser();
           Get.offAllNamed("/home");
         });
       }
