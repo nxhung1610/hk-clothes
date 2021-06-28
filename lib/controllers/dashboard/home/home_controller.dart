@@ -63,32 +63,37 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
   Future fetchProductsRecommand() async {
     if (isLoadingRecommand.value) return;
     isLoadingRecommand.value = true;
-    var result = await firestore
-        .collection("shopstore")
-        .doc("products")
-        .collection("product_detail")
-        .limit(9)
-        .get();
-    result.docs.forEach((element) {
-      listProductRecommand.add(Product.fromJson(element.data()));
-    });
+    try {
+      var result = await firestore
+          .collection("shopstore")
+          .doc("products")
+          .collection("product_detail")
+          .limit(9)
+          .get();
+      result.docs.forEach((element) {
+        listProductRecommand.add(Product.fromJson(element.data()));
+      });
+    } catch (e) {}
     isLoadingRecommand.value = false;
   }
 
   Future fetchProductsRecommandNext() async {
     if (isLoadingRecommand.value) return;
     isLoadingRecommand.value = true;
-    var result = await firestore
-        .collection("shopstore")
-        .doc("products")
-        .collection("product_detail")
-        .orderBy("pid")
-        .startAfter([listProductRecommand[listProductRecommand.length - 1].pid])
-        .limit(9)
-        .get();
-    result.docs.forEach((element) {
-      listProductRecommand.add(Product.fromJson(element.data()));
-    });
+    try {
+      var result = await firestore
+          .collection("shopstore")
+          .doc("products")
+          .collection("product_detail")
+          .orderBy("pid")
+          .startAfter(
+              [listProductRecommand[listProductRecommand.length - 1].pid])
+          .limit(9)
+          .get();
+      result.docs.forEach((element) {
+        listProductRecommand.add(Product.fromJson(element.data()));
+      });
+    } catch (e) {}
     isLoadingRecommand.value = false;
   }
 
@@ -100,15 +105,18 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
   Future fetchProductsTrending() async {
     if (isLoadingTrending.value) return;
     isLoadingTrending.value = true;
-    var result = await firestore
-        .collection("shopstore")
-        .doc("products")
-        .collection("product_detail")
-        .limit(9)
-        .get();
-    result.docs.forEach((element) {
-      listProductTrending.add(Product.fromJson(element.data()));
-    });
+    try {
+      var result = await firestore
+          .collection("shopstore")
+          .doc("products")
+          .collection("product_detail")
+          .limit(9)
+          .get();
+      result.docs.forEach((element) {
+        listProductTrending.add(Product.fromJson(element.data()));
+      });
+    } catch (e) {}
+
     isLoadingTrending.value = false;
   }
 
@@ -120,23 +128,25 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
   Future fetchProductsSale() async {
     if (isLoadingSale.value) return;
     isLoadingSale.value = true;
-    var result = await firestore
-        .collection("shopstore")
-        .doc("products")
-        .collection("product_sale")
-        .limit(9)
-        .get();
-    result.docs.forEach((element) async {
-      final i = ProductSale.fromJson(element.data());
-      final k = await firestore
+    try {
+      var result = await firestore
           .collection("shopstore")
           .doc("products")
-          .collection("product_detail")
-          .where("pid", isEqualTo: i.pid)
+          .collection("product_sale")
+          .limit(9)
           .get();
-      if (k.docs[0].exists)
-        listProductSale.add(Product.fromJson(k.docs[0].data()));
-    });
+      result.docs.forEach((element) async {
+        final i = ProductSale.fromJson(element.data());
+        final k = await firestore
+            .collection("shopstore")
+            .doc("products")
+            .collection("product_detail")
+            .where("pid", isEqualTo: i.pid)
+            .get();
+        if (k.docs[0].exists)
+          listProductSale.add(Product.fromJson(k.docs[0].data()));
+      });
+    } catch (e) {}
     isLoadingSale.value = false;
   }
 }

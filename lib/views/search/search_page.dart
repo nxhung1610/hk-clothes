@@ -10,50 +10,6 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-          backgroundColor: Colors.grey[50],
-          appBar: AppBar(
-            actions: [
-              IconButton(
-                onPressed: () {
-                 /* searchController.isSearch.value=true;
-                  searchController.myFocusNode.value.requestFocus();*/
-                  showSearch(context: context, delegate: DataSearch());
-
-                },
-                icon: Icon(
-                  Icons.search,
-                  color: AppColors.app[400],
-                ),
-              ),
-            ],
-            iconTheme: IconThemeData(color: Colors.black),
-            backgroundColor: Colors.white,
-            elevation: 2,
-            title: Obx(()=>!searchController.isSearch.value
-                ? Text(
-              "Search Here",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 23,
-                color: AppColors.app[400],
-              ),
-            )
-                : TextField(
-              focusNode: searchController.myFocusNode.value,
-              autofocus: true ,
-              decoration: InputDecoration(
-                  border: InputBorder.none, hintText: 'Search Here'),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 23,
-                color: AppColors.app[400],
-              ),
-            ),)
-          )),
-    );
+    return Scaffold();
   }
 }
