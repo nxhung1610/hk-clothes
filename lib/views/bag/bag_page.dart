@@ -77,6 +77,7 @@ class BagPage extends StatelessWidget {
                         itemBuilder: (context, index) => ProductbagItem(
                           productBag:
                               bagController.bag.value.productBags[index],
+                          function: productController.showInforItem,
                         ),
                       ),
                     )

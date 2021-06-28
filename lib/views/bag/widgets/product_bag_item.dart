@@ -14,7 +14,10 @@ import 'package:uuid/uuid.dart';
 
 class ProductbagItem extends StatelessWidget {
   final ProductBag productBag;
-  const ProductbagItem({key, this.productBag}) : super(key: key);
+  final Function function;
+  const ProductbagItem(
+      {key, @required this.productBag, @required this.function})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +91,10 @@ class ProductbagItem extends StatelessWidget {
                 children: [
                   Container(
                     width: 100,
-                    child: _image,
+                    child: GestureDetector(
+                      onTap: () => function(productDetail.value.item, tag),
+                      child: _image,
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -155,7 +161,10 @@ class ProductbagItem extends StatelessWidget {
                                           IconButton(
                                             splashColor: Colors.transparent,
                                             hoverColor: Colors.transparent,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              bagController
+                                                  .decrNumProduct(productBag);
+                                            },
                                             icon: Icon(
                                               FontAwesomeIcons.minus,
                                               color: AppColors.app.shade400,
@@ -179,7 +188,10 @@ class ProductbagItem extends StatelessWidget {
                                           IconButton(
                                             splashColor: Colors.transparent,
                                             hoverColor: Colors.transparent,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              bagController
+                                                  .incrNumProduct(productBag);
+                                            },
                                             icon: Icon(
                                               FontAwesomeIcons.plus,
                                               color: AppColors.app.shade400,
@@ -199,7 +211,12 @@ class ProductbagItem extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            onSelected: (value) {},
+                            onSelected: (value) {
+                              switch (value.value) {
+                                case 1:
+                                  bagController.delProductBag(productBag);
+                              }
+                            },
                             itemBuilder: (context) =>
                                 MenuItems.listMenu.map(buillMenuItem).toList(),
                           ),

@@ -31,8 +31,8 @@ class BagController extends GetxController {
       showSnackbar("Add Bag", "Please select Size Product", false);
       return;
     }
-    var n =
-        bag.value.productBags.where((element) => element.pid == productBag.pid);
+    var n = bag.value.productBags.where((element) =>
+        element.pid == productBag.pid && element.sid == productBag.sid);
     if (n.length == 0)
       bag.value.productBags.add(productBag);
     else
@@ -47,6 +47,89 @@ class BagController extends GetxController {
     }
   }
 
+  Future delProductBag(ProductBag productBag) async {
+    showLoading();
+    if (productBag.sid == null) {
+      dismissLoadingWidget();
+      showSnackbar("Delete Product", "Delete product failed", false);
+      return;
+    }
+
+    bag.value.productBags.removeWhere((element) =>
+        element.pid == productBag.pid && element.sid == productBag.sid);
+
+    try {
+      await refbag.set(bag.value.toJson());
+      dismissLoadingWidget();
+      showSnackbar("Delete Product", "Delete Product from bag success", true);
+    } catch (e) {
+      dismissLoadingWidget();
+      showSnackbar("Delete Product", "Delete Product from bag success", false);
+    }
+  }
+
+  Future incrNumProduct(ProductBag productBag) async {
+    showLoading();
+    if (productBag.sid == null) {
+      dismissLoadingWidget();
+      showSnackbar("Add Product", "Please select Size Product", false);
+      return;
+    }
+
+    var n = bag.value.productBags.where((element) =>
+        element.pid == productBag.pid && element.sid == productBag.sid);
+    if (n.length == 0) {
+      dismissLoadingWidget();
+      showSnackbar("Add Product", "Some thing errors", false);
+      return;
+    }
+
+    n.first.number++;
+
+    try {
+      await refbag.set(bag.toJson());
+      dismissLoadingWidget();
+      showSnackbar("Add Product", "Increase success", true);
+    } catch (e) {
+      n.first.number = n.first.number - 1;
+      dismissLoadingWidget();
+      showSnackbar("Add Product", "Increase failed", false);
+    }
+  }
+
+  Future decrNumProduct(ProductBag productBag) async {
+    showLoading();
+    if (productBag.sid == null) {
+      dismissLoadingWidget();
+      showSnackbar("Add Product", "Please select Size Product", false);
+      return;
+    }
+
+    var n = bag.value.productBags.where((element) =>
+        element.pid == productBag.pid && element.sid == productBag.sid);
+    if (n.length == 0) {
+      dismissLoadingWidget();
+      showSnackbar("Decrease Product", "Some thing errors", false);
+      return;
+    }
+
+    if (n.first.number == 1) {
+      dismissLoadingWidget();
+      return;
+    }
+    n.first.number = n.first.number - 1;
+
+    try {
+      await refbag.set(bag.toJson());
+      dismissLoadingWidget();
+      showSnackbar("Decrease Product", "Increase success", true);
+    } catch (e) {
+      n.first.number++;
+      dismissLoadingWidget();
+      showSnackbar("Decrease Product", "Increase failed", false);
+    }
+  }
+
   void fecthBagUser() {
     refbag = firestore
         .collection("users")
@@ -54,9 +137,10 @@ class BagController extends GetxController {
         .collection("status")
         .doc("bag");
     refbag.snapshots().listen((event) {
-      if (event.exists)
+      if (event.exists) {
         bag.value = Bag.fromJson(event.data());
-      else
+        if (bag.value.productBags == null) bag.value.productBags = [];
+      } else
         bag.value.productBags.clear();
     });
   }
