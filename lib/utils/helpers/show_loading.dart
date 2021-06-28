@@ -6,7 +6,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 
 showLoading() {
   Get.defaultDialog(
-    title: '',
+    title: 'Loading',
     content: SpinKitFadingCube(
       color: AppColors.app[400],
       size: 30.0,

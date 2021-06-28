@@ -83,6 +83,15 @@ class BagPage extends StatelessWidget {
                     )
                   ],
                 ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: AppColors.app[200],
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: null,
               )
             ],
           ),

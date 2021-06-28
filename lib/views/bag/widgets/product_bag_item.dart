@@ -124,12 +124,13 @@ class ProductbagItem extends StatelessWidget {
                                     height: 5,
                                   ),
                                   Text(
-                                    "${productDetail.value.item.price.toInt()} VNĐ",
+                                    "${productDetail.value.sale == null ? productDetail.value.item.price.toInt() : (productDetail.value.item.price.toInt() - (productDetail.value.item.price.toInt() * (productDetail.value.sale.percent / 100))).toInt()} VNĐ",
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 18,
-                                      color: AppColors.app.shade100,
-                                    ),
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 18,
+                                        color: productDetail.value.sale == null
+                                            ? AppColors.app.shade100
+                                            : AppColors.app.shade700),
                                   ),
                                   SizedBox(
                                     height: 5,

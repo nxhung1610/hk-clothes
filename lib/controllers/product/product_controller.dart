@@ -61,15 +61,23 @@ class ProductController extends GetxController {
     productDetail.sizes =
         size.docs.map((e) => ProductSize.fromJson(e.data())).toList();
     productDetail.sizes.sort((a, b) => a.sid.compareTo(b.sid));
+    var sale = await getSaleProduct(pid);
+    if (sale != null) {
+      productDetail.sale = sale;
+    }
+    return productDetail;
+  }
+
+  Future getSaleProduct(String pid) async {
     var sale = await firestore
         .collection("shopstore")
         .doc("products")
-        .collection("product_size")
+        .collection("product_sale")
         .where("pid", isEqualTo: pid)
         .get();
-    if (sale.docs.isNotEmpty) {
-      productDetail.sale = ProductSale.fromJson(sale.docs[0].data());
-    }
-    return productDetail;
+    if (sale.docChanges.isNotEmpty) {
+      return ProductSale.fromJson(sale.docs[0].data());
+    } else
+      return null;
   }
 }
