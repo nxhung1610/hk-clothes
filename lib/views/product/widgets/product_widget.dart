@@ -121,27 +121,22 @@ class ShimmerProduct extends StatelessWidget {
       child: Container(
         width: size,
         height: size * 1.25,
-        child: Stack(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            Positioned.fill(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: size * 0.05,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: 20,
-                    width: size * 0.4,
-                  ),
-                ],
+            Expanded(
+              child: Container(
+                color: Colors.white,
               ),
+            ),
+            SizedBox(
+              height: size * 0.05,
+            ),
+            Container(
+              color: Colors.white,
+              height: 20,
+              width: size * 0.4,
             ),
           ],
         ),
