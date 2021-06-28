@@ -148,7 +148,19 @@ class HomeTab extends StatelessWidget {
                     )
                   : Container(),
             ),
-
+            Obx(
+              () => !homeController.isLoadingRecommand.value
+                  ? Container()
+                  : Center(
+                      child: SpinKitWave(
+                        size: 30,
+                        color: AppColors.app[500],
+                      ),
+                    ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).padding.bottom,
+            )
           ],
         ),
       ),

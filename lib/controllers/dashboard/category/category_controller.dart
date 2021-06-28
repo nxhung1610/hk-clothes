@@ -36,15 +36,21 @@ class CategoryController extends GetxController with SingleGetTickerProviderMixi
   Future fetchProducts(String input) async {
     if (isLoading.value) return;
     isLoading.value = true;
-    var result = await firestore
-        .collection("shopstore")
-        .doc("products")
-        .collection("product_detail").where('type',isEqualTo: input)
-        .limit(9)
-        .get();
-    result.docs.forEach((element) {
-      listProduct.add(Product.fromJson(element.data()));
-    });
+    try{
+      var result = await firestore
+          .collection("shopstore")
+          .doc("products")
+          .collection("product_detail").where('type',isEqualTo: input)
+          .limit(9)
+          .get();
+      result.docs.forEach((element) {
+        listProduct.add(Product.fromJson(element.data()));
+      });
+    }
+    catch(e)
+    {
+
+    }
     isLoading.value = false;
   }
 
@@ -52,7 +58,7 @@ class CategoryController extends GetxController with SingleGetTickerProviderMixi
   Future fetchProductsNext(String input) async {
     if (isLoading.value) return;
     isLoading.value = true;
-    var result = await firestore
+    try{var result = await firestore
         .collection("shopstore")
         .doc("products")
         .collection("product_detail").where('type',isEqualTo: input)
@@ -62,7 +68,12 @@ class CategoryController extends GetxController with SingleGetTickerProviderMixi
         .get();
     result.docs.forEach((element) {
       listProduct.add(Product.fromJson(element.data()));
-    });
+    });}
+    catch(e)
+    {
+
+
+    }
     isLoading.value = false;
   }
 
