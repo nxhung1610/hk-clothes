@@ -105,7 +105,10 @@ class ProductbagItem extends StatelessWidget {
                 children: [
                   Container(
                     width: 100,
-                    child: _image,
+                    child: GestureDetector(
+                      onTap: () => function(productDetail.value.item, tag),
+                      child: Hero(tag: tag, child: _image),
+                    ),
                   ),
                   Expanded(
                     child: Container(

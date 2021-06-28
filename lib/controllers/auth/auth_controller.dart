@@ -62,7 +62,6 @@ class AuthController extends GetxController {
           userInfor = value.obs;
           ever(userInfor, _updateInfor);
           dashBoardController = DashboardController.instance;
-          dashBoardController.reloadData();
 
           bagController.fecthBagUser();
           Get.offAllNamed("/home");
@@ -169,6 +168,10 @@ class AuthController extends GetxController {
   Future signOut() async {
     firebaseAuth.signOut();
     firebaseUser = null;
+    emailController.clear();
+    passwordController.clear();
+    passwordVerifyController.clear();
+    dashBoardController.reloadData();
     _isActive = false;
   }
 }

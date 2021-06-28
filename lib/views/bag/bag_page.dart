@@ -76,7 +76,11 @@ class BagPage extends StatelessWidget {
                             ),
                           ),
                           Obx(() {
-                            bagController.resetWallet();
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              // executes after build
+                              bagController.resetWallet();
+                            });
+
                             return ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
