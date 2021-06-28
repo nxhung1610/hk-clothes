@@ -27,6 +27,7 @@ class ProductbagItem extends StatelessWidget {
     Rx<ProductBag> finalProductBag = productBag.obs;
     Rx<ProductDetail> productDetail = ProductDetail().obs;
     Rx<SizeProduct> select = SizeProduct().obs;
+    Size size = MediaQuery.of(context).size;
     productController.getProductDetail(finalProductBag.value.pid).then((value) {
       productDetail.value = value;
 
@@ -104,10 +105,7 @@ class ProductbagItem extends StatelessWidget {
                 children: [
                   Container(
                     width: 100,
-                    child: GestureDetector(
-                      onTap: () => function(productDetail.value.item, tag),
-                      child: _image,
-                    ),
+                    child: _image,
                   ),
                   Expanded(
                     child: Container(
@@ -221,7 +219,11 @@ class ProductbagItem extends StatelessWidget {
                             ),
                           ),
                           PopupMenuButton<MenuItem>(
-                            offset: Offset(-10, 40),
+                            offset: Offset(
+                                -10,
+                                size.height * 0.04 > 30
+                                    ? 30
+                                    : size.height * 0.04),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),

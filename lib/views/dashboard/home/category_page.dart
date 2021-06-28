@@ -50,7 +50,9 @@ class CategoryPage extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed('/bag');
+              },
               icon: Icon(
                 Icons.shopping_bag,
                 color: AppColors.app[400],
@@ -77,6 +79,7 @@ class CategoryPage extends StatelessWidget {
                 (_) => categoryController.fetchProducts(categoryItem.type));
           },
           child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 10),
             controller: categoryController.controller,
             physics: AlwaysScrollableScrollPhysics(),
             child: Column(
@@ -98,7 +101,6 @@ class CategoryPage extends StatelessWidget {
                               ? categoryController.listProduct.length
                               : 0,
                           itemBuilder: (context, index) {
-
                             return ProductItem(
                               size: size.width * (1 / 3),
                               clothes: categoryController.listProduct[index],
