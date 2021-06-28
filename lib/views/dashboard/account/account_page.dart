@@ -35,20 +35,22 @@ class AccountPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: Container(
-                      width: 90.0,
-                      height: 90.0,
-                      decoration: BoxDecoration(
-                          color: AppColors.app.shade200,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: authController
-                                      .userInfor.value.photoUrl.isNotEmpty
-                                  ? NetworkImage(
-                                      authController.userInfor.value.photoUrl)
-                                  : AssetImage(
-                                      'assets/images/logo_splash.png')))),
+                  child: Obx(
+                    () => Container(
+                        width: 90.0,
+                        height: 90.0,
+                        decoration: BoxDecoration(
+                            color: AppColors.app.shade200,
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: authController
+                                        .userInfor.value.photoUrl.isNotEmpty
+                                    ? NetworkImage(
+                                        authController.userInfor.value.photoUrl)
+                                    : AssetImage(
+                                        'assets/images/logo_splash.png')))),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10),
