@@ -30,7 +30,6 @@ class ProductbagItem extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     productController.getProductDetail(finalProductBag.value.pid).then((value) {
       productDetail.value = value;
-
       select.value = productController.sizes
           .where((e) => e.sid == finalProductBag.value.sid)
           .first;

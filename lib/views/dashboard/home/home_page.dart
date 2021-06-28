@@ -34,6 +34,15 @@ class HomePage extends StatelessWidget {
                 color: AppColors.app[400],
               ),
             ),
+            IconButton(
+              onPressed: () {
+                Get.toNamed('/search');
+              },
+              icon: Icon(
+                Icons.search,
+                color: AppColors.app[400],
+              ),
+            ),
           ],
           elevation: 2,
           title: Text(

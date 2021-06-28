@@ -20,6 +20,7 @@ import 'package:hk_clothes/views/dashboard/account/editprofile/updateinfo.dart';
 import 'package:hk_clothes/views/dashboard/dashboard_page.dart';
 import 'package:hk_clothes/views/dashboard/shipping/shipping_page.dart';
 import 'package:hk_clothes/views/product/product_page.dart';
+import 'package:hk_clothes/views/search/search_page.dart';
 import 'package:hk_clothes/views/splash/splash.dart';
 
 import 'controllers/dashboard/account/account_controller.dart';
@@ -103,6 +104,12 @@ class MyApp extends StatelessWidget {
           transition: Transition.topLevel,
           transitionDuration: Duration(milliseconds: 350),
         ),
+        GetPage(
+          name: "/search",
+          page: () => SearchPage(),
+          transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 350),
+        )
       ],
       initialRoute: "/splash",
     );
