@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/models/category.dart';
@@ -12,6 +14,22 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _onScroll() {
+      if (categoryController.controller.offset >=
+              categoryController.controller.position.maxScrollExtent &&
+          !categoryController.controller.position.outOfRange) {
+        if (categoryController.listProduct.length != 0)
+          categoryController.fetchProductsNext(categoryItem.type);
+        else
+          categoryController.fetchProducts(categoryItem.type);
+      }
+    }
+
+    categoryController.controller.addListener(_onScroll);
+
+    categoryController.refreshPage();
+    if (categoryController.listProduct.length == 0)
+      categoryController.fetchProducts(categoryItem.type);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       bottom: false,
@@ -52,29 +70,59 @@ class CategoryPage extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Container(
-          child: GridView.builder(
+        body: RefreshIndicator(
+          onRefresh: () async {
+            categoryController.refreshPage();
+            WidgetsBinding.instance.addPostFrameCallback(
+                (_) => categoryController.fetchProducts(categoryItem.type));
+          },
+          child: SingleChildScrollView(
             controller: categoryController.controller,
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.66,
-              mainAxisSpacing: 5,
-              crossAxisSpacing: 5,
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                Obx(() => categoryController.listProduct.length != 0
+                    ? Container(
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.66,
+                            mainAxisSpacing: 5,
+                            crossAxisSpacing: 5,
+                          ),
+                          itemCount: categoryController.listProduct != null
+                              ? categoryController.listProduct.length
+                              : 0,
+                          itemBuilder: (context, index) {
+
+                            return ProductItem(
+                              size: size.width * (1 / 3),
+                              clothes: categoryController.listProduct[index],
+                              function: productController.showInforItem,
+                            );
+                          },
+                        ),
+                      )
+                    : Container()),
+                Obx(
+                  () => !categoryController.isLoading.value
+                      ? Container()
+                      : Center(
+                          child: SpinKitWave(
+                            size: 30,
+                            color: AppColors.app[500],
+                          ),
+                        ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).padding.bottom,
+                )
+              ],
             ),
-            itemCount: homeController.listProductRecommand != null
-                ? homeController.listProductRecommand.length
-                : 0,
-            itemBuilder: (context, index) {
-              // print(homeController.listProductRecommand[index]
-              //     .toJson());
-              return ProductItem(
-                size: size.width * (1 / 3),
-                clothes: homeController.listProductRecommand[index],
-                function: productController.showInforItem,
-              );
-            },
           ),
         ),
       ),

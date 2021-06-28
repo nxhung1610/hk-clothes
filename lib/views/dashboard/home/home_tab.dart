@@ -65,7 +65,7 @@ class HomeTab extends StatelessWidget {
               itemCount: homeController.listCategory.length,
               itemBuilder: (BuildContext context, int index) {
                 return CategoryItem(
-                  categoryItem: homeController.listCategory[index],
+                  categoryItem: homeController.listCategory[index]
                 );
               },
             ),
@@ -148,19 +148,7 @@ class HomeTab extends StatelessWidget {
                     )
                   : Container(),
             ),
-            Obx(
-              () => !homeController.isLoadingRecommand.value
-                  ? Container()
-                  : Center(
-                      child: SpinKitWave(
-                        size: 30,
-                        color: AppColors.app[500],
-                      ),
-                    ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
+
           ],
         ),
       ),
