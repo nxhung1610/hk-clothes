@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/views/dashboard/account/account_page.dart';
 
 import 'package:hk_clothes/views/dashboard/home/home_page.dart';
-import 'package:hk_clothes/views/dashboard/search/search_page.dart';
 import 'package:hk_clothes/views/dashboard/shipping/shipping_page.dart';
 
 class DashboardController extends GetxController {
@@ -17,7 +16,6 @@ class DashboardController extends GetxController {
 
   final List<Widget> pageList = [
     HomePage(),
-    SearchPage(),
     ShippingPage(),
     AccountPage(),
   ];

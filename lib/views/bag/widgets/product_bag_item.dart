@@ -29,9 +29,20 @@ class ProductbagItem extends StatelessWidget {
     Rx<SizeProduct> select = SizeProduct().obs;
     productController.getProductDetail(finalProductBag.value.pid).then((value) {
       productDetail.value = value;
+
       select.value = productController.sizes
           .where((e) => e.sid == finalProductBag.value.sid)
           .first;
+
+      // Caculator
+      bagController.numberProductBag.value += productBag.number;
+      bagController.sumPrice.value +=
+          productDetail.value.item.price.toInt() * productBag.number;
+      if (productDetail.value.sale != null)
+        bagController.discountPrice.value += (productDetail.value.item.price *
+                productBag.number *
+                (productDetail.value.sale.percent / 100))
+            .toInt();
     });
     final _image = Obx(
       () => productDetail.value.item != null

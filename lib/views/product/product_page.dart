@@ -255,9 +255,19 @@ class ProductPage extends StatelessWidget {
             ),
           ),
           Container(
+            decoration: BoxDecoration(
+              color: AppColors.app.shade200,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 4,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             width: size.width,
-            color: AppColors.app.shade200,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: AppColors.app,

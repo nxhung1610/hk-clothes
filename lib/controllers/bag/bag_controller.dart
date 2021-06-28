@@ -11,6 +11,9 @@ class BagController extends GetxController {
   static BagController instance = Get.find();
   Rx<Bag> bag;
   DocumentReference refbag;
+  RxInt sumPrice;
+  RxInt discountPrice;
+  RxInt numberProductBag;
 
   @override
   void onInit() {
@@ -20,8 +23,16 @@ class BagController extends GetxController {
   @override
   Future<void> onReady() async {
     bag = Bag(productBags: []).obs;
-
+    sumPrice = 0.obs;
+    discountPrice = 0.obs;
+    numberProductBag = 0.obs;
     super.onReady();
+  }
+
+  void resetWallet() {
+    sumPrice.value = 0;
+    discountPrice.value = 0;
+    numberProductBag.value = 0;
   }
 
   Future addProductBag(ProductBag productBag) async {
@@ -137,6 +148,7 @@ class BagController extends GetxController {
         .collection("status")
         .doc("bag");
     refbag.snapshots().listen((event) {
+      resetWallet();
       if (event.exists) {
         bag.value = Bag.fromJson(event.data());
         if (bag.value.productBags == null) bag.value.productBags = [];

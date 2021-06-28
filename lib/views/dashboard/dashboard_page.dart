@@ -53,12 +53,8 @@ class DashboardPage extends StatelessWidget {
               label: 'home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'search',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.local_shipping),
-              label: 'bag',
+              label: 'shipping',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined),
