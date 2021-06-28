@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/views/bag/widgets/product_bag_item.dart';
+import 'package:hk_clothes/views/product/widgets/product_widget.dart';
 
 class BagPage extends StatelessWidget {
   const BagPage({key}) : super(key: key);
@@ -10,6 +11,7 @@ class BagPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    RxInt sumPrice = 0.obs;
     return Scaffold(
       backgroundColor: AppColors.app[550],
       appBar: AppBar(
@@ -70,28 +72,69 @@ class BagPage extends StatelessWidget {
                       ),
                     ),
                     Obx(
-                      () => ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: bagController.bag.value.productBags.length,
-                        itemBuilder: (context, index) => ProductbagItem(
-                          productBag:
-                              bagController.bag.value.productBags[index],
-                          function: productController.showInforItem,
-                        ),
-                      ),
+                      () {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: bagController.bag.value.productBags.length,
+                          itemBuilder: (context, index) {
+                            final t = ProductbagItem(
+                              productBag:
+                                  bagController.bag.value.productBags[index],
+                              function: productController.showInforItem,
+                            );
+                            return t;
+                          },
+                        );
+                      },
                     )
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: AppColors.app[200],
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+              SizedBox(
+                height: 15,
+              ),
+              Obx(
+                () => Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: AppColors.app[200],
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Product(s) Total :',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${sumPrice.value} VND',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                child: null,
               )
             ],
           ),

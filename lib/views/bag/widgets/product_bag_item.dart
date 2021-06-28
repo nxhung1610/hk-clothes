@@ -15,9 +15,11 @@ import 'package:uuid/uuid.dart';
 class ProductbagItem extends StatelessWidget {
   final ProductBag productBag;
   final Function function;
-  const ProductbagItem(
-      {key, @required this.productBag, @required this.function})
-      : super(key: key);
+  const ProductbagItem({
+    key,
+    @required this.productBag,
+    @required this.function,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
