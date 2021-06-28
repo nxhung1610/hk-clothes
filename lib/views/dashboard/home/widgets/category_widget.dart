@@ -6,6 +6,7 @@ import 'package:hk_clothes/views/dashboard/home/category_page.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category categoryItem;
+
   const CategoryItem({Key key, @required this.categoryItem}) : super(key: key);
 
   @override
