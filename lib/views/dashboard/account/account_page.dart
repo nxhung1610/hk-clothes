@@ -17,17 +17,8 @@ class AccountPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-                icon: Icon(Icons.settings_rounded),
-                color: AppColors.app[400],
-                onPressed: () {})
-          ],
-          leading: IconButton(
-            icon: Icon(Icons.notifications),
-            color: AppColors.app[400],
-            onPressed: () {},
-          ),
+
+
         ),
         body: Column(
           children: [
@@ -91,54 +82,44 @@ class AccountPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          Get.snackbar("Snackbar1", "Order");
-                        },
-                        child: SizedBox(
-                          width: 100,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '0',
+                      SizedBox(
+                        width: 100,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '0',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text('Order',
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text('Order',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal)),
+                          ],
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          Get.snackbar("Snackbar2", "Wish List");
-                        },
-                        child: SizedBox(
-                          width: 100,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '0',
+                      SizedBox(
+                        width: 100,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '0',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text('Wish List',
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text('Wish List',
-                                  style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.normal)),
-                            ],
-                          ),
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal)),
+                          ],
                         ),
                       ),
                     ],

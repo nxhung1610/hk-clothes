@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 
-class RecommededTab extends StatelessWidget {
-  const RecommededTab({Key key}) : super(key: key);
+class WishListTab extends StatelessWidget {
+  const WishListTab({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
