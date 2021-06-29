@@ -10,7 +10,7 @@ class Contact {
     phoneNumber = json['phone_number'];
     address = json['address'];
     receiver = json['receiver'];
-    contactId = json['coontact_id'];
+    contactId = json['contact_id'];
   }
 
   Map<String, dynamic> toJson() {

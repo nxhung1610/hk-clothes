@@ -65,7 +65,7 @@ class _OrderInforPageState extends State<OrderInforPage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print('llll');
+                        Get.toNamed('/contact');
                       },
                       child: Container(
                         width: double.infinity,
@@ -84,7 +84,71 @@ class _OrderInforPageState extends State<OrderInforPage> {
                                             .selectContact.value.contactId !=
                                         null
                                     ? Column(
-                                        children: [],
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Contact',
+                                            style: TextStyle(
+                                              color:
+                                                  Colors.green.withAlpha(500),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  contactController
+                                                      .selectContact
+                                                      .value
+                                                      .receiver,
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: AppColors.app,
+                                                  ),
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                contactController.selectContact
+                                                    .value.phoneNumber,
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.app.shade400,
+                                                ),
+                                                textAlign: TextAlign.right,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              contactController
+                                                  .selectContact.value.address,
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppColors.app.shade400,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       )
                                     : Text(
                                         "Please add your contact",

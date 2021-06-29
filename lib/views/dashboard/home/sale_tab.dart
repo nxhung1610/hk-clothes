@@ -22,7 +22,7 @@ class SaleTab extends StatelessWidget {
           return;
         },
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 5),
+          padding: EdgeInsets.symmetric(vertical: 10),
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.max,

@@ -6,7 +6,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/controllers/bag/bag_controller.dart';
-import 'package:hk_clothes/controllers/bag/contact_controller.dart';
+import 'package:hk_clothes/controllers/contact/contact_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/search/search_controller.dart';
 
@@ -14,6 +14,7 @@ import 'package:hk_clothes/controllers/product/product_controller.dart';
 
 import 'package:hk_clothes/controllers/dashboard/shipping/shipping_controller.dart';
 import 'package:hk_clothes/views/bag/bag_page.dart';
+import 'package:hk_clothes/views/contact/contact_page.dart';
 import 'package:hk_clothes/views/order/order_page.dart';
 
 import 'package:hk_clothes/views/dashboard/account/editprofile/editprofile_page.dart';
@@ -118,7 +119,13 @@ class MyApp extends StatelessWidget {
           page: () => OrderInforPage(),
           transition: Transition.topLevel,
           transitionDuration: Duration(milliseconds: 350),
-        )
+        ),
+        GetPage(
+          name: "/contact",
+          page: () => ContactPage(),
+          transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 350),
+        ),
       ],
       initialRoute: "/splash",
     );

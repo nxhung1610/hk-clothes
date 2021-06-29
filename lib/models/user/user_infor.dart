@@ -1,4 +1,4 @@
-import 'package:hk_clothes/models/user/contact.dart';
+import 'package:hk_clothes/models/contact.dart';
 
 class UserInfor {
   String uid;
