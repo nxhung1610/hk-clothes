@@ -47,6 +47,9 @@ dependencies:
   #
   font_awesome_flutter: ^9.1.0
 
+  #badges
+  badges: ^2.0.1
+
 flutter_native_splash:
   image: assets/images/logo_splash.png
   color: "#ffffff"

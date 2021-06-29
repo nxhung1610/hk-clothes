@@ -1,3 +1,5 @@
+import 'package:hk_clothes/models/user/contact.dart';
+
 class UserInfor {
   String uid;
   String firstName;
@@ -39,6 +41,7 @@ class UserInfor {
     data['birthday'] = this.birthday;
     data['email'] = this.email;
     data['photo_url'] = this.photoUrl;
+
     return data;
   }
 }

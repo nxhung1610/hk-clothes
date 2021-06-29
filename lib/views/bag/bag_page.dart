@@ -244,7 +244,9 @@ class BagPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       primary: AppColors.app,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed('/order');
+                    },
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: Obx(

@@ -32,7 +32,6 @@ class BagController extends GetxController {
   void resetWallet() {
     sumPrice.value = 0;
     discountPrice.value = 0;
-    numberProductBag.value = 0;
   }
 
   Future addProductBag(ProductBag productBag) async {
@@ -152,6 +151,12 @@ class BagController extends GetxController {
       if (event.exists) {
         bag.value = Bag.fromJson(event.data());
         if (bag.value.productBags == null) bag.value.productBags = [];
+
+        numberProductBag.value = bag.value.productBags.length != 0
+            ? bag.value.productBags
+                .map((e) => e.number)
+                .reduce((value, element) => value + element)
+            : 0;
       } else
         bag.value.productBags.clear();
     });

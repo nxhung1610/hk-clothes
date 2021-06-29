@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -29,9 +30,20 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Get.toNamed('/bag');
               },
-              icon: Icon(
-                Icons.shopping_bag,
-                color: AppColors.app[400],
+              icon: Badge(
+                badgeContent: Obx(
+                  () => Text(
+                    '${bagController.numberProductBag.value}',
+                    style: TextStyle(
+                      color: AppColors.app.shade200,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                child: Icon(
+                  Icons.shopping_bag,
+                  color: AppColors.app[400],
+                ),
               ),
             ),
             IconButton(

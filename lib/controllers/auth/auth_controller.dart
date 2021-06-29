@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/controllers/dashboard/dashboard_controller.dart';
-import 'package:hk_clothes/models/user_infor.dart';
+import 'package:hk_clothes/models/user/user_infor.dart';
 import 'package:hk_clothes/utils/helpers/show_loading.dart';
 import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
@@ -61,8 +61,9 @@ class AuthController extends GetxController {
         await userCheckDatabase(user).then((value) {
           userInfor = value.obs;
           ever(userInfor, _updateInfor);
-          dashBoardController = DashboardController.instance;
 
+          dashBoardController = DashboardController.instance;
+          contactController.fetchDataContact();
           bagController.fecthBagUser();
           Get.offAllNamed("/home");
         });
