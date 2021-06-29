@@ -128,7 +128,13 @@ class ProductController extends GetxController {
         if (event.exists) {
           whitelist.addAll(
               (event.data()['products'] as List<dynamic>).cast<String>());
-        }
+        } else
+          firestore
+              .collection("users")
+              .doc(authController.userInfor.value.uid)
+              .collection('status')
+              .doc('whitelist')
+              .set({'products': []});
       });
     } catch (e) {
       whitelist.clear();
