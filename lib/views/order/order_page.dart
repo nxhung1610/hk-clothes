@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
@@ -321,6 +322,7 @@ class _OrderInforPageState extends State<OrderInforPage> {
                   onPressed: () {
                     if (contactController.selectContact.value.contactId !=
                         null) {
+                      showCustomDialog(true);
                     } else
                       showActionSnackBar(context, 'Please add your contact');
                   },
@@ -338,6 +340,62 @@ class _OrderInforPageState extends State<OrderInforPage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void showCustomDialog(bool isSuccess) {
+    RxDouble size = 0.0.obs;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      size.value = 70;
+    });
+    Get.defaultDialog(
+      title: '',
+      titleStyle: TextStyle(fontSize: 0),
+      content: Obx(
+        () => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 70,
+              child: Center(
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 450),
+                  curve: Curves.bounceOut,
+                  width: size.value,
+                  height: size.value,
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    child: isSuccess
+                        ? Icon(
+                            Icons.check_circle_rounded,
+                            color: Colors.greenAccent,
+                          )
+                        : Container(
+                            margin: EdgeInsets.all(2),
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.redAccent,
+                            ),
+                            child: Icon(
+                              Icons.clear_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              isSuccess ? 'Payment success' : 'Payment fail',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ],
         ),
       ),
     );
