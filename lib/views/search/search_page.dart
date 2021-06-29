@@ -14,18 +14,25 @@ class SearchPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => searchWidgetState();
 }
-
+//TODO : first time search ko clear text dc
 class searchWidgetState extends State<SearchPage>
     with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController animationController;
   bool isforward = false;
-
+  Rx<bool> isSearch = false.obs;
   Tween<double> tween;
+  FocusNode _focusNode = new FocusNode();
 
   @override
   void initState() {
     super.initState();
+    searchController.textController.addListener(() {
+      if (_focusNode.hasFocus)
+        isSearch.value = true;
+      else
+        isSearch.value = false;
+    });
     animationController =
         AnimationController(vsync: (this), duration: Duration(seconds: 1));
 
@@ -65,7 +72,6 @@ class searchWidgetState extends State<SearchPage>
 
     Size size = MediaQuery.of(context).size;
     tween.end = size.width - size.width * 0.3;
-    /* searchController.refreshPage();*/ // TODO:here
     return Scaffold(
       appBar: AppBar(
         title: Text("Search"),
@@ -104,6 +110,7 @@ class searchWidgetState extends State<SearchPage>
                         ),
                         width: animation.value,
                         child: TextField(
+                          focusNode: _focusNode,
                           onChanged: (String value) {
                             searchController.refreshPage();
                             searchController.fetchProducts(value);
@@ -119,16 +126,18 @@ class searchWidgetState extends State<SearchPage>
                         hoverColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        icon: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          searchController.fetchProducts(
-                              searchController.textController.text);
-                          searchController.refreshPage();
-                          FocusScope.of(context).unfocus();
-                        },
+                        icon: Obx(() => isSearch.value
+                            ? Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                              )
+                            : Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              )),
+                        onPressed: isSearch.value
+                            ? () {searchController.textController.clear();}
+                            : () {},
                       )
                     ],
                   ),
