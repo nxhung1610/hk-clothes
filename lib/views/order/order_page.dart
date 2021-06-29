@@ -299,6 +299,19 @@ class _OrderInforPageState extends State<OrderInforPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 5),
+                child: Obx(
+                  () => Text(
+                    'Grand Total : ${bagController.sumPrice.value - bagController.discountPrice.value} VND',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.app.shade400,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
