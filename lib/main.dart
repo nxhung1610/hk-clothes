@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/search",
           page: () => SearchPage(),
-          transition: Transition.rightToLeft,
+          transition: Transition.fadeIn,
           transitionDuration: Duration(milliseconds: 350),
         ),
         GetPage(
