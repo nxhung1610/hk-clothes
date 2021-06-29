@@ -65,15 +65,20 @@ class searchWidgetState extends State<SearchPage>
 
     Size size = MediaQuery.of(context).size;
     tween.end = size.width - size.width * 0.3;
-   /* searchController.refreshPage();*/// TODO:here
+    /* searchController.refreshPage();*/ // TODO:here
     return Scaffold(
       appBar: AppBar(
-        title: Text("Search") ,centerTitle: true,
-        leading: IconButton(icon: Icon(Icons.arrow_back_rounded),onPressed: (){
-          searchController.refreshPage();
-          Get.back();
-          searchController.textController.clear();
-        },),foregroundColor: Colors.white,
+        title: Text("Search"),
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            searchController.refreshPage();
+            Get.back();
+            searchController.textController.clear();
+          },
+        ),
+        foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: Column(
@@ -99,14 +104,14 @@ class searchWidgetState extends State<SearchPage>
                         ),
                         width: animation.value,
                         child: TextField(
-                          onChanged: (String value){
+                          onChanged: (String value) {
                             searchController.refreshPage();
                             searchController.fetchProducts(value);
                           },
                           controller: searchController.textController,
-                          autofocus: true,
                           cursorColor: Colors.white12,
-                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                           decoration: InputDecoration(border: InputBorder.none),
                         ),
                       ),

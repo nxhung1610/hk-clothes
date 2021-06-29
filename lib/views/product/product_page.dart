@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
@@ -8,6 +9,7 @@ import 'package:hk_clothes/models/bag/product_bag.dart';
 import 'package:hk_clothes/models/product/product.dart';
 import 'package:hk_clothes/models/product/product_detail.dart';
 import 'package:hk_clothes/models/product/size.dart';
+import 'package:like_button/like_button.dart';
 
 class ProductPage extends StatelessWidget {
   @override
@@ -130,24 +132,55 @@ class ProductPage extends StatelessWidget {
                       child: Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
                           children: [
-                            Text(
-                              '${product.price.toInt()} VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 22,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${product.price.toInt()} VND',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    product.productName,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              product.productName,
-                              style: TextStyle(
-                                fontSize: 18,
+                            LikeButton(
+                              circleColor: CircleColor(
+                                start: AppColors.app,
+                                end: AppColors.app,
                               ),
+                              bubblesColor: BubblesColor(
+                                dotPrimaryColor: AppColors.app,
+                                dotSecondaryColor: AppColors.app,
+                              ),
+                              likeBuilder: (bool isLiked) {
+                                return Icon(
+                                  Icons.favorite,
+                                  size: size.width * 0.07 > 30
+                                      ? 30
+                                      : size.width * 0.07,
+                                  color: isLiked
+                                      ? AppColors.app.shade700
+                                      : Colors.grey,
+                                );
+                              },
+                              isLiked: productController.whitelist
+                                  .contains(product.pid),
+                              onTap: (isLiked) => productController.likeProduct(
+                                  product.pid, isLiked),
                             ),
                           ],
                         ),

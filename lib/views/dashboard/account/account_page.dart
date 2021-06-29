@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,40 @@ class AccountPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-
-
+          actions: [
+            Container(
+              child: Ink(
+                decoration: ShapeDecoration(
+                  color: Colors.white.withOpacity(0.4),
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  splashRadius: 25,
+                  icon: Badge(
+                    badgeContent: Obx(
+                      () => Text(
+                        '${bagController.numberProductBag.value}',
+                        style: TextStyle(
+                          color: AppColors.app.shade200,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.shopping_bag,
+                      color: AppColors.app[400],
+                    ),
+                  ),
+                  onPressed: () {
+                    Get.toNamed("/bag");
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+          ],
         ),
         body: Column(
           children: [

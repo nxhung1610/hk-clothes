@@ -64,6 +64,7 @@ class AuthController extends GetxController {
 
           dashBoardController = DashboardController.instance;
           contactController.fetchDataContact();
+          productController.fetchWhiteList();
           bagController.fecthBagUser();
           Get.offAllNamed("/home");
         });

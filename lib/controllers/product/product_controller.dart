@@ -15,12 +15,16 @@ import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 
 class ProductController extends GetxController {
   static ProductController instance = Get.find();
-  RxList<SizeProduct> sizes = <SizeProduct>[].obs;
-  Rx<ScrollController> controller = ScrollController().obs;
+  RxList<SizeProduct> sizes;
+  Rx<ScrollController> controller;
+  RxList<String> whitelist;
 
   @override
   void onInit() {
     super.onInit();
+    sizes = <SizeProduct>[].obs;
+    controller = ScrollController().obs;
+    whitelist = <String>[].obs;
   }
 
   @override
@@ -79,5 +83,56 @@ class ProductController extends GetxController {
       return ProductSale.fromJson(sale.docs[0].data());
     } else
       return null;
+  }
+
+  Future<bool> likeProduct(String pid, bool isLiked) async {
+    if (!isLiked)
+      try {
+        await firestore
+            .collection("users")
+            .doc(authController.userInfor.value.uid)
+            .collection('status')
+            .doc('whitelist')
+            .update({
+          'products': FieldValue.arrayUnion([pid])
+        });
+      } catch (e) {
+        return isLiked;
+      }
+    else
+      try {
+        await firestore
+            .collection("users")
+            .doc(authController.userInfor.value.uid)
+            .collection('status')
+            .doc('whitelist')
+            .update({
+          'products': FieldValue.arrayRemove([pid])
+        });
+      } catch (e) {
+        return isLiked;
+      }
+    return !isLiked;
+  }
+
+  void fetchWhiteList() {
+    try {
+      firestore
+          .collection("users")
+          .doc(authController.userInfor.value.uid)
+          .collection('status')
+          .doc('whitelist')
+          .snapshots()
+          .listen((event) {
+        whitelist.clear();
+        if (event.exists) {
+          whitelist.addAll(
+              (event.data()['products'] as List<dynamic>).cast<String>());
+        }
+      });
+    } catch (e) {
+      whitelist.clear();
+      print(e);
+    }
   }
 }

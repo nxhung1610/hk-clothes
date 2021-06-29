@@ -49,6 +49,7 @@ dependencies:
 
   #badges
   badges: ^2.0.1
+  like_button: ^2.0.2
 
 flutter_native_splash:
   image: assets/images/logo_splash.png
