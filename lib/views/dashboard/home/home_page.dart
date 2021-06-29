@@ -18,13 +18,6 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: Icon(
-              Icons.notifications,
-              color: AppColors.app[400],
-            ),
-            onPressed: () {},
-          ),
           actions: [
             IconButton(
               onPressed: () {

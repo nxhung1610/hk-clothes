@@ -8,15 +8,15 @@ class AccountController extends GetxController with SingleGetTickerProviderMixin
 
   final listTabItem = [
     Tab(
-      text: "Recommended",
+      text: "WishList",
     ),
-    Tab(
+   /* Tab(
       text: "Recent Viewed",
-    ),
+    ),*/
   ];
    final listTab = [
-    RecommededTab(),
-    RecentViewTab(),
+    WishListTab(),
+    /*RecentViewTab(),*/
   ];
 
    TabController tabController;
