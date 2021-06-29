@@ -49,20 +49,6 @@ class searchWidgetState extends State<SearchPage>
 
   @override
   Widget build(BuildContext context) {
-    _onScroll() {
-      if (searchController.scrollController.offset >=
-              searchController.scrollController.position.maxScrollExtent &&
-          !searchController.scrollController.position.outOfRange) {
-        if (searchController.listProduct.length != 0)
-          searchController
-              .fetchProductsNext(searchController.textController.text);
-        else
-          searchController.fetchProducts(searchController.textController.text);
-      }
-    }
-
-    categoryController.controller.addListener(_onScroll);
-
     Size size = MediaQuery.of(context).size;
     tween.end = size.width - size.width * 0.3;
     /* searchController.refreshPage();*/ // TODO:here
@@ -73,7 +59,6 @@ class searchWidgetState extends State<SearchPage>
         leading: IconButton(
           icon: Icon(Icons.arrow_back_rounded),
           onPressed: () {
-            searchController.refreshPage();
             Get.back();
             searchController.textController.clear();
           },
@@ -82,6 +67,7 @@ class searchWidgetState extends State<SearchPage>
       ),
       body: SafeArea(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               padding: EdgeInsets.symmetric(vertical: 10),
@@ -105,9 +91,9 @@ class searchWidgetState extends State<SearchPage>
                         width: animation.value,
                         child: TextField(
                           onChanged: (String value) {
-                            searchController.refreshPage();
                             searchController.fetchProducts(value);
                           },
+                          autofocus: false,
                           controller: searchController.textController,
                           cursorColor: Colors.white12,
                           style: TextStyle(
@@ -135,9 +121,10 @@ class searchWidgetState extends State<SearchPage>
                 ),
               ),
             ),
-            Expanded(
-              child: Obx(() => searchController.listProduct.length != 0
-                  ? GridView.builder(
+            Obx(() => searchController.listProduct.length != 0
+                ? Expanded(
+                    child: GridView.builder(
+                      controller: searchController.scrollController,
                       physics: AlwaysScrollableScrollPhysics(),
                       padding: EdgeInsets.symmetric(horizontal: 5),
                       shrinkWrap: true,
@@ -157,12 +144,22 @@ class searchWidgetState extends State<SearchPage>
                           function: productController.showInforItem,
                         );
                       },
-                    )
-                  : Container()),
+                    ),
+                  )
+                : Container()),
+            Obx(
+              () => !searchController.isSearch.value
+                  ? Container()
+                  : Container(
+                      padding: EdgeInsets.all(10),
+                      child: Center(
+                        child: SpinKitCircle(
+                          size: 45,
+                          color: AppColors.app,
+                        ),
+                      ),
+                    ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
           ],
         ),
       ),
