@@ -38,3 +38,14 @@ showSnackbar(title, message, valid) {
         .then((value) => _isShowSnakbar = false);
   }
 }
+
+showActionSnackBar(BuildContext context, String mesage) {
+  final snackBar = SnackBar(
+    duration: Duration(milliseconds: 400),
+    content: Text(
+      mesage,
+      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+    ),
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}

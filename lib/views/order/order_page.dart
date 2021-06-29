@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 import 'package:hk_clothes/views/order/widgets/item_product.dart';
 
 class OrderInforPage extends StatefulWidget {
@@ -86,7 +87,7 @@ class _OrderInforPageState extends State<OrderInforPage> {
                                         children: [],
                                       )
                                     : Text(
-                                        "Please add your adress",
+                                        "Please add your contact",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -214,45 +215,53 @@ class _OrderInforPageState extends State<OrderInforPage> {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.app.shade200,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 3,
-                  blurRadius: 4,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            width: size.width,
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.app,
-                    ),
-                    onPressed: () {},
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        "PLACE ORDER",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+        ],
+      ),
+      bottomNavigationBar: Builder(
+        builder: (context) => Container(
+          decoration: BoxDecoration(
+            color: AppColors.app.shade200,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 4,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          width: size.width,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColors.app,
+                  ),
+                  onPressed: () {
+                    if (contactController.selectContact.value.contactId !=
+                        null) {
+                    } else
+                      showActionSnackBar(context, 'Please add your contact');
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "PLACE ORDER",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

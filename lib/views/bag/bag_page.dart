@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 import 'package:hk_clothes/views/bag/widgets/product_bag_item.dart';
 import 'package:hk_clothes/views/product/widgets/product_widget.dart';
 
@@ -210,61 +211,68 @@ class BagPage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.app.shade200,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 3,
-                  blurRadius: 4,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            width: size.width,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: Obx(
-                    () => Text(
-                      'Total : ${bagController.sumPrice.value - bagController.discountPrice.value} VND',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+        ],
+      ),
+      bottomNavigationBar: Builder(
+        builder: (context) => Container(
+          decoration: BoxDecoration(
+            color: AppColors.app.shade200,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 4,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          width: size.width,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 5),
+                child: Obx(
+                  () => Text(
+                    'Total : ${bagController.sumPrice.value - bagController.discountPrice.value} VND',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
                     ),
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.app,
-                    ),
-                    onPressed: () {
+              ),
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColors.app,
+                  ),
+                  onPressed: () {
+                    if (bagController.numberProductBag.value != 0)
                       Get.toNamed('/order');
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Obx(
-                        () => Text(
-                          "SECURE CHECK OUT(${bagController.numberProductBag.value})",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    else
+                      showActionSnackBar(
+                          context, "At least one product in your bag");
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Obx(
+                      () => Text(
+                        "SECURE CHECK OUT(${bagController.numberProductBag.value})",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
