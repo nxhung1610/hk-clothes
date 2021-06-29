@@ -35,7 +35,7 @@ class ProductbagItem extends StatelessWidget {
           .first;
 
       // Caculator
-      bagController.numberProductBag.value += productBag.number;
+
       bagController.sumPrice.value +=
           productDetail.value.item.price.toInt() * productBag.number;
       if (productDetail.value.sale != null)
