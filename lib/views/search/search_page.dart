@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/controllers/dashboard/search/search_controller.dart';
 import 'package:hk_clothes/views/dashboard/account/widget/editprofile_widget.dart';
+import 'package:hk_clothes/views/product/widgets/product_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key key}) : super(key: key);
@@ -41,33 +44,47 @@ class searchWidgetState extends State<SearchPage>
         animationController.forward();
         isforward = true;
       });
-
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+    _onScroll() {
+      if (searchController.scrollController.offset >=
+              searchController.scrollController.position.maxScrollExtent &&
+          !searchController.scrollController.position.outOfRange) {
+        if (searchController.listProduct.length != 0)
+          searchController
+              .fetchProductsNext(searchController.textController.text);
+        else
+          searchController.fetchProducts(searchController.textController.text);
+      }
+    }
+
+    categoryController.controller.addListener(_onScroll);
+
     Size size = MediaQuery.of(context).size;
-    tween.end = size.width - size.width*0.3;
-
+    tween.end = size.width - size.width * 0.3;
+   /* searchController.refreshPage();*/// TODO:here
     return Scaffold(
-      extendBodyBehindAppBar: true,
-
+      appBar: AppBar(
+        title: Text("Search") ,centerTitle: true,
+        leading: IconButton(icon: Icon(Icons.arrow_back_rounded),onPressed: (){
+          searchController.refreshPage();
+          Get.back();
+          searchController.textController.clear();
+        },),foregroundColor: Colors.white,
+      ),
       body: SafeArea(
-        top: true,
-        
-        child: Container(
-          width: size.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children:[
-              SizedBox(height: 10,),
-              Align(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              width: size.width,
+              child: Align(
                 alignment: Alignment.center,
                 child: Container(
-                  padding: EdgeInsets.all(size.width*0.01),
+                  padding: EdgeInsets.all(size.width * 0.01),
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -77,12 +94,19 @@ class searchWidgetState extends State<SearchPage>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: size.width*0.04,),
+                        padding: EdgeInsets.only(
+                          left: size.width * 0.04,
+                        ),
                         width: animation.value,
-
                         child: TextField(
+                          onChanged: (String value){
+                            searchController.refreshPage();
+                            searchController.fetchProducts(value);
+                          },
+                          controller: searchController.textController,
+                          autofocus: true,
                           cursorColor: Colors.white12,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
                           decoration: InputDecoration(border: InputBorder.none),
                         ),
                       ),
@@ -95,16 +119,46 @@ class searchWidgetState extends State<SearchPage>
                           color: Colors.white,
                         ),
                         onPressed: () {
-
+                          searchController.fetchProducts(
+                              searchController.textController.text);
+                          searchController.refreshPage();
+                          FocusScope.of(context).unfocus();
                         },
                       )
                     ],
                   ),
                 ),
               ),
-            ],
-
-          ),
+            ),
+            Expanded(
+              child: Obx(() => searchController.listProduct.length != 0
+                  ? GridView.builder(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.66,
+                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 5,
+                      ),
+                      itemCount: searchController.listProduct != null
+                          ? searchController.listProduct.length
+                          : 0,
+                      itemBuilder: (context, index) {
+                        return ProductItem(
+                          size: size.width * (1 / 3),
+                          clothes: searchController.listProduct[index],
+                          function: productController.showInforItem,
+                        );
+                      },
+                    )
+                  : Container()),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).padding.bottom,
+            )
+          ],
         ),
       ),
     );
