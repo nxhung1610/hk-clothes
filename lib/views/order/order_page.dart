@@ -408,6 +408,15 @@ class _OrderInforPageState extends State<OrderInforPage> {
           ],
         ),
       ),
+    ).timeout(
+      Duration(seconds: 5),
+      onTimeout: () {
+        if (isSuccess) {
+          Get.back();
+          Get.back();
+        } else
+          Get.back();
+      },
     );
     if (isSuccess) {
       Get.back();

@@ -13,178 +13,184 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          actions: [
-            Container(
-              child: Ink(
-                decoration: ShapeDecoration(
-                  color: Colors.white.withOpacity(0.4),
-                  shape: CircleBorder(),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        actions: [
+          Container(
+            child: Ink(
+              decoration: ShapeDecoration(
+                color: Colors.white.withOpacity(0.4),
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                splashRadius: 25,
+                icon: Badge(
+                  badgeContent: Obx(
+                    () => Text(
+                      '${bagController.numberProductBag.value}',
+                      style: TextStyle(
+                        color: AppColors.app.shade200,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.shopping_bag,
+                    color: AppColors.app[400],
+                  ),
                 ),
-                child: IconButton(
-                  splashRadius: 25,
-                  icon: Badge(
-                    badgeContent: Obx(
-                      () => Text(
-                        '${bagController.numberProductBag.value}',
-                        style: TextStyle(
+                onPressed: () {
+                  Get.toNamed("/bag");
+                },
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Obx(
+                  () => Container(
+                      width: 90.0,
+                      height: 90.0,
+                      decoration: BoxDecoration(
                           color: AppColors.app.shade200,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.shopping_bag,
-                      color: AppColors.app[400],
-                    ),
-                  ),
-                  onPressed: () {
-                    Get.toNamed("/bag");
-                  },
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: authController
+                                      .userInfor.value.photoUrl.isNotEmpty
+                                  ? NetworkImage(
+                                      authController.userInfor.value.photoUrl)
+                                  : AssetImage(
+                                      'assets/images/logo_splash.png')))),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: Obx(
-                    () => Container(
-                        width: 90.0,
-                        height: 90.0,
-                        decoration: BoxDecoration(
-                            color: AppColors.app.shade200,
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: authController
-                                        .userInfor.value.photoUrl.isNotEmpty
-                                    ? NetworkImage(
-                                        authController.userInfor.value.photoUrl)
-                                    : AssetImage(
-                                        'assets/images/logo_splash.png')))),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        authController.userInfor.value.nickname,
+              Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      authController.userInfor.value.nickname,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 5),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed("/editprofile");
+                      },
+                      child: Text(
+                        'Edit Profile',
                         style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
+                            color: Colors.grey,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 5),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed("/editprofile");
-                        },
-                        child: Text(
-                          'Edit Profile',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
-              child: Card(
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '0',
+              ),
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            child: Card(
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Obx(
+                            () => Text(
+                              orderController.orders
+                                  .where((element) => !element.delivered)
+                                  .length
+                                  .toString(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text('Order',
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.normal)),
-                          ],
-                        ),
+                          ),
+                          Text('Order',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal)),
+                        ],
                       ),
-                      SizedBox(
-                        width: 100,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '0',
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Obx(
+                            () => Text(
+                              productController.wishlist.length.toString(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text('Wish List',
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.normal)),
-                          ],
-                        ),
+                          ),
+                          Text('Wish List',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal)),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            TabBar(
-              labelPadding: EdgeInsets.zero,
-              labelStyle: TextStyle(
-                fontSize: 18,
-                fontFamily: "UbuntuMono",
-                fontWeight: FontWeight.bold,
-              ),
-              labelColor: AppColors.app,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(
-                    width: 4.0,
-                    style: BorderStyle.solid,
-                    color: AppColors.app[400]),
-                insets: EdgeInsets.symmetric(horizontal: size.width * 0.3),
-              ),
-              controller: accountController.tabController,
-              tabs: accountController.listTabItem,
+          ),
+          TabBar(
+            labelPadding: EdgeInsets.zero,
+            labelStyle: TextStyle(
+              fontSize: 18,
+              fontFamily: "UbuntuMono",
+              fontWeight: FontWeight.bold,
             ),
-            Expanded(
-                child: TabBarView(
+            labelColor: AppColors.app,
+            indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(
+                  width: 4.0,
+                  style: BorderStyle.solid,
+                  color: AppColors.app[400]),
+              insets: EdgeInsets.symmetric(horizontal: size.width * 0.3),
+            ),
+            controller: accountController.tabController,
+            tabs: accountController.listTabItem,
+          ),
+          Expanded(
+            child: TabBarView(
               controller: accountController.tabController,
               children: accountController.listTab,
-            )),
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
