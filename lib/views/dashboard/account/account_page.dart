@@ -161,6 +161,7 @@ class AccountPage extends StatelessWidget {
               ),
             ),
             TabBar(
+
               labelPadding: EdgeInsets.zero,
               labelStyle: TextStyle(
                 fontSize: 18,
@@ -173,7 +174,7 @@ class AccountPage extends StatelessWidget {
                     width: 4.0,
                     style: BorderStyle.solid,
                     color: AppColors.app[400]),
-                insets: EdgeInsets.symmetric(horizontal: size.width * 0.12),
+                insets: EdgeInsets.symmetric(horizontal: size.width * 0.3),
               ),
               controller: accountController.tabController,
               tabs: accountController.listTabItem,

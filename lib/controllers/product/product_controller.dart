@@ -152,14 +152,16 @@ class ProductController extends GetxController {
   fetchDataWishList(List<String> pid) async
   {
     try{
-      var result = await firestore
+      firestore
           .collection("shopstore")
           .doc("products")
-          .collection("product_detail").where('pid',arrayContains: [pid])
-          .get();
-      result.docs.forEach((element) {
-        productWishList.add(Product.fromJson(element.data()));
+          .collection("product_detail").where('pid',whereIn:pid )
+          .get().then((value) {
+            print(value.docs.length);
+        productWishList.clear();
+        productWishList.addAll(value.docs.map((e) => Product.fromJson(e.data())).toList());
       });
+
     }
     catch(e)
     {

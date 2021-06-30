@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/views/dashboard/account/widget/editprofile_widget.dart';
 import 'package:hk_clothes/views/product/widgets/product_widget.dart';
 
 class WishListTab extends StatelessWidget {
@@ -11,18 +12,18 @@ class WishListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    if (productController.wishlist.length == 0)
-      WidgetsBinding.instance
-          .addPostFrameCallback((_) => productController.fetchWishList());
+
 
 
     Size size = MediaQuery.of(context).size;
-    return Expanded(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10),
       child: Column(
+
         children: [
           Obx(
-            () => productController.wishlist.length != 0
-                ? Container(
+            () => productController.productWishList.length != 0
+                ? Expanded(
                     child: GridView.builder(
                       padding: EdgeInsets.symmetric(horizontal: 5),
                       shrinkWrap: true,
@@ -33,12 +34,10 @@ class WishListTab extends StatelessWidget {
                         mainAxisSpacing: 5,
                         crossAxisSpacing: 5,
                       ),
-                      itemCount: productController.wishlist != null
-                          ? productController.wishlist.length
+                      itemCount: productController.productWishList != null
+                          ? productController.productWishList.length
                           : 0,
                       itemBuilder: (context, index) {
-                        // print(homeController.listProductRecommand[index]
-                        //     .toJson());
                         return ProductItem(
                           size: size.width * (1 / 3),
                           clothes: productController.productWishList[index],
