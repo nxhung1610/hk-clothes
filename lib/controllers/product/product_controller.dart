@@ -17,14 +17,16 @@ class ProductController extends GetxController {
   static ProductController instance = Get.find();
   RxList<SizeProduct> sizes;
   Rx<ScrollController> controller;
-  RxList<String> whitelist;
+  RxList<String> wishlist;
+  RxList<Product> productWishList;
 
   @override
   void onInit() {
     super.onInit();
     sizes = <SizeProduct>[].obs;
     controller = ScrollController().obs;
-    whitelist = <String>[].obs;
+    wishlist = <String>[].obs;
+    productWishList= <Product>[].obs;
   }
 
   @override
@@ -36,7 +38,7 @@ class ProductController extends GetxController {
         .get()
         .then((value) => sizes.value =
             value.docs.map((e) => SizeProduct.fromJson(e.data())).toList());
-
+    ever(wishlist,fetchDataWishList);
     super.onReady();
   }
 
@@ -115,7 +117,7 @@ class ProductController extends GetxController {
     return !isLiked;
   }
 
-  void fetchWhiteList() {
+  void fetchWishList() {
     try {
       firestore
           .collection("users")
@@ -124,15 +126,38 @@ class ProductController extends GetxController {
           .doc('whitelist')
           .snapshots()
           .listen((event) {
-        whitelist.clear();
+        wishlist.clear();
         if (event.exists) {
-          whitelist.addAll(
+          wishlist.addAll(
               (event.data()['products'] as List<dynamic>).cast<String>());
         }
       });
     } catch (e) {
-      whitelist.clear();
+      wishlist.clear();
       print(e);
     }
   }
+
+
+  fetchDataWishList(List<String> pid) async
+  {
+    try{
+      var result = await firestore
+          .collection("shopstore")
+          .doc("products")
+          .collection("product_detail").where('pid',arrayContains: [pid])
+          .get();
+      result.docs.forEach((element) {
+        productWishList.add(Product.fromJson(element.data()));
+      });
+    }
+    catch(e)
+    {
+
+    }
+
+
+  }
+
+
 }

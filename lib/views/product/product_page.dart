@@ -177,7 +177,7 @@ class ProductPage extends StatelessWidget {
                                       : Colors.grey,
                                 );
                               },
-                              isLiked: productController.whitelist
+                              isLiked: productController.wishlist
                                   .contains(product.pid),
                               onTap: (isLiked) => productController.likeProduct(
                                   product.pid, isLiked),
