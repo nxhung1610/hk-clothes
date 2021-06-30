@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
-import 'package:hk_clothes/models/order.dart';
+import 'package:hk_clothes/models/order/order.dart';
 import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 import 'package:hk_clothes/views/order/widgets/item_product.dart';
 import 'package:uuid/uuid.dart';
@@ -328,6 +328,8 @@ class _OrderInforPageState extends State<OrderInforPage> {
                           orderId: Uuid().v1(),
                           dateCreate: DateTime.now().toUtc().toString(),
                           delivered: false,
+                          totalPrice: bagController.sumPrice.value.toDouble() -
+                              bagController.discountPrice.value.toDouble(),
                           products: bagController.bag.value.productBags);
                       showCustomDialog(
                           await orderController.orderProducts(order));

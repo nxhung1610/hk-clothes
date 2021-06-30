@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hk_clothes/models/order/order.dart';
 import 'package:hk_clothes/views/dashboard/shipping/bought_tab.dart';
 import 'package:hk_clothes/views/dashboard/shipping/shipping_tab.dart';
 
-class ShippingController extends GetxController with SingleGetTickerProviderMixin
-{
+class ShippingController extends GetxController
+    with SingleGetTickerProviderMixin {
   static ShippingController instance = Get.find();
 
   final listTabItem = [
@@ -27,6 +28,4 @@ class ShippingController extends GetxController with SingleGetTickerProviderMixi
     super.onInit();
     tabController = TabController(vsync: this, length: listTabItem.length);
   }
-
-
 }

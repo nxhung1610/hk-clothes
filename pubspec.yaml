@@ -54,6 +54,9 @@ dependencies:
   #uid
   uuid: 3.0.4
 
+  #parse datetime
+  intl: ^0.17.0
+
 
 flutter_native_splash:
   image: assets/images/logo_splash.png

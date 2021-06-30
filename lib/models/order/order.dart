@@ -5,6 +5,7 @@ class Order {
   String dateCreate;
   String dateDone;
   bool delivered;
+  double totalPrice;
   List<ProductBag> products;
 
   Order(
@@ -12,6 +13,7 @@ class Order {
       this.dateCreate,
       this.dateDone,
       this.delivered,
+      this.totalPrice,
       this.products});
 
   Order.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class Order {
     dateCreate = json['date_create'];
     dateDone = json['date_done'];
     delivered = json['delivered'];
+    totalPrice = json['total_price'];
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
@@ -33,6 +36,7 @@ class Order {
     data['date_create'] = this.dateCreate;
     data['date_done'] = this.dateDone;
     data['delivered'] = this.delivered;
+    data['total_price'] = this.totalPrice;
     if (this.products != null) {
       data['products'] = this.products.map((v) => v.toJson()).toList();
     }

@@ -63,10 +63,7 @@ class AuthController extends GetxController {
           userInfor = value.obs;
           ever(userInfor, _updateInfor);
 
-          dashBoardController = DashboardController.instance;
-          contactController.fetchDataContact();
-          productController.fetchWhiteList();
-          bagController.fecthBagUser();
+          fetchDataUser();
           Get.offAllNamed("/home");
         });
       }
@@ -79,6 +76,14 @@ class AuthController extends GetxController {
     // Dispose Controller
     emailController.dispose();
     passwordController.dispose();
+  }
+
+  void fetchDataUser() {
+    dashBoardController = DashboardController.instance;
+    contactController.fetchDataContact();
+    productController.fetchWhiteList();
+    bagController.fecthBagUser();
+    orderController.fetchDataOrders();
   }
 
   Future signIn() async {

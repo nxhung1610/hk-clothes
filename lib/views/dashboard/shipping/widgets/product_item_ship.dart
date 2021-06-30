@@ -12,10 +12,10 @@ import 'package:hk_clothes/models/product/size.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 
-class ProductbagItem extends StatelessWidget {
+class ProductShipItem extends StatelessWidget {
   final ProductBag productBag;
   final Function function;
-  const ProductbagItem({
+  const ProductShipItem({
     key,
     @required this.productBag,
     @required this.function,
@@ -166,78 +166,21 @@ class ProductbagItem extends StatelessWidget {
                                     ),
                                   ),
                                   Expanded(
-                                    child: Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          IconButton(
-                                            splashColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            onPressed: () {
-                                              bagController
-                                                  .decrNumProduct(productBag);
-                                            },
-                                            icon: Icon(
-                                              FontAwesomeIcons.minus,
-                                              color: AppColors.app.shade400,
-                                              size: 15,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            finalProductBag.value.number
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          IconButton(
-                                            splashColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            onPressed: () {
-                                              bagController
-                                                  .incrNumProduct(productBag);
-                                            },
-                                            icon: Icon(
-                                              FontAwesomeIcons.plus,
-                                              color: AppColors.app.shade400,
-                                              size: 15,
-                                            ),
-                                          ),
-                                        ],
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Text(
+                                        'x${productBag.number}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 18,
+                                          color: AppColors.app,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                          PopupMenuButton<BagMenuItem>(
-                            offset: Offset(
-                                -10,
-                                size.height * 0.04 > 30
-                                    ? 30
-                                    : size.height * 0.04),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            onSelected: (value) {
-                              switch (value.value) {
-                                case 1:
-                                  bagController.delProductBag(productBag);
-                              }
-                            },
-                            itemBuilder: (context) => BagMenuItems.listMenu
-                                .map(buillMenuItem)
-                                .toList(),
                           ),
                         ],
                       ),
@@ -249,16 +192,6 @@ class ProductbagItem extends StatelessWidget {
           )
         : ShimmerProductBagItem());
     // return ShimmerProductBagItem();
-  }
-
-  PopupMenuEntry<BagMenuItem> buillMenuItem(BagMenuItem e) {
-    return PopupMenuItem(
-      child: Text(
-        e.text,
-        style: TextStyle(fontWeight: FontWeight.w600),
-      ),
-      value: e,
-    );
   }
 }
 

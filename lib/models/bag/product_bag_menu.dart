@@ -1,14 +1,14 @@
-class MenuItems {
-  static const List<MenuItem> listMenu = [itemDelete];
+class BagMenuItems {
+  static const List<BagMenuItem> listMenu = [itemDelete];
 
-  static const itemDelete = MenuItem(
+  static const itemDelete = BagMenuItem(
     text: "Delete",
     value: 1,
   );
 }
 
-class MenuItem {
+class BagMenuItem {
   final String text;
   final int value;
-  const MenuItem({this.value, this.text});
+  const BagMenuItem({this.value, this.text});
 }
