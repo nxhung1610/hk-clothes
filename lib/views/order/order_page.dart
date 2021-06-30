@@ -411,6 +411,7 @@ class _OrderInforPageState extends State<OrderInforPage> {
     );
     if (isSuccess) {
       Get.back();
+      Get.back();
     }
   }
 }
