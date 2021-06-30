@@ -59,6 +59,8 @@ class searchWidgetState extends State<SearchPage>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     tween.end = size.width - size.width * 0.3;
+    Rx<String> searchText = ''.obs;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Search"),
@@ -66,8 +68,8 @@ class searchWidgetState extends State<SearchPage>
         leading: IconButton(
           icon: Icon(Icons.arrow_back_rounded),
           onPressed: () {
-            Get.back();
             searchController.textController.clear();
+            Get.back();
           },
         ),
         foregroundColor: Colors.white,
@@ -100,6 +102,7 @@ class searchWidgetState extends State<SearchPage>
                           focusNode: _focusNode,
                           onChanged: (String value) {
                             searchController.fetchProducts(value);
+                            searchText.value = value;
                           },
                           autofocus: false,
                           controller: searchController.textController,
@@ -109,25 +112,25 @@ class searchWidgetState extends State<SearchPage>
                           decoration: InputDecoration(border: InputBorder.none),
                         ),
                       ),
-                      IconButton(
-                        hoverColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        icon: Obx(() => isSearch.value
-                            ? Icon(
-                                Icons.clear,
-                                color: Colors.white,
-                              )
-                            : Icon(
-                                Icons.search,
-                                color: Colors.white,
-                              )),
-                        onPressed: isSearch.value
-                            ? () {
-                                searchController.textController.clear();
-                              }
-                            : () {},
-                      )
+                      Obx(
+                        () => IconButton(
+                          hoverColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          icon: searchText.value.length == 0
+                              ? Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                )
+                              : Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                ),
+                          onPressed: () {
+                            searchController.textController.clear();
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
