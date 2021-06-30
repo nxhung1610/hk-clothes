@@ -45,6 +45,60 @@ class OrderController extends GetxController {
     return await bagController.clearProductBag();
   }
 
+  Future<bool> completeOrder(Order order) async {
+    showLoading();
+    final temp = order.toJson();
+    final tempK = Order.fromJson(temp);
+    tempK.dateDone = DateTime.now().toString();
+    tempK.delivered = true;
+    try {
+      await firestore
+          .collection("users")
+          .doc(authController.userInfor.value.uid)
+          .collection("orders")
+          .doc(order.orderId)
+          .set(tempK.toJson())
+          .timeout(
+        Duration(seconds: 30),
+        onTimeout: () {
+          dismissLoadingWidget();
+          return false;
+        },
+      );
+    } catch (e) {
+      dismissLoadingWidget();
+      return false;
+    }
+    dismissLoadingWidget();
+
+    return true;
+  }
+
+  Future<bool> cancelOrder(Order order) async {
+    showLoading();
+    try {
+      await firestore
+          .collection("users")
+          .doc(authController.userInfor.value.uid)
+          .collection("orders")
+          .doc(order.orderId)
+          .delete()
+          .timeout(
+        Duration(seconds: 30),
+        onTimeout: () {
+          dismissLoadingWidget();
+          return false;
+        },
+      );
+    } catch (e) {
+      dismissLoadingWidget();
+      return false;
+    }
+    dismissLoadingWidget();
+
+    return true;
+  }
+
   void fetchDataOrders() async {
     firestore
         .collection("users")

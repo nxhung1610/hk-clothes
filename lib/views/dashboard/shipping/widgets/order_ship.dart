@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/models/order/order.dart';
-import 'package:hk_clothes/models/order/order_shhip_menu.dart';
+import 'package:hk_clothes/models/order/order_ship_menu.dart';
 import 'package:hk_clothes/views/dashboard/shipping/widgets/product_item_ship.dart';
 import 'package:intl/intl.dart';
 
@@ -45,10 +45,15 @@ class OrderShip extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(
-                Icons.local_shipping_rounded,
-                color: Colors.amber,
-              ),
+              !order.delivered
+                  ? Icon(
+                      Icons.local_shipping_rounded,
+                      color: Colors.amber,
+                    )
+                  : Icon(
+                      Icons.approval_rounded,
+                      color: Colors.greenAccent[400],
+                    ),
               !order.delivered
                   ? PopupMenuButton<OrderMenuItem>(
                       offset: Offset(-10,
@@ -59,8 +64,10 @@ class OrderShip extends StatelessWidget {
                       onSelected: (value) {
                         switch (value.value) {
                           case 1:
+                            orderController.completeOrder(order);
                             break;
                           case 2:
+                            orderController.cancelOrder(order);
                             break;
                         }
                       },
