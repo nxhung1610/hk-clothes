@@ -59,6 +59,7 @@ class AuthController extends GetxController {
       if (!_isActive) {
         _isActive = true;
         await userCheckDatabase(user).then((value) {
+          if (value == null) return;
           userInfor = value.obs;
           ever(userInfor, _updateInfor);
 
@@ -148,7 +149,13 @@ class AuthController extends GetxController {
   }
 
   Future<UserInfor> userCheckDatabase(User user) async {
-    var k = await firestore.collection("users").doc(user.uid).get();
+    var k = await firestore
+        .collection("users")
+        .doc(user.uid)
+        .get()
+        .timeout(Duration(seconds: 30), onTimeout: () {
+      return null;
+    });
     if (k.exists) {
       return UserInfor.fromJson(k.data());
     } else {
@@ -162,7 +169,14 @@ class AuthController extends GetxController {
         gender: "male",
         photoUrl: "",
       );
-      await firestore.collection("users").doc(k.uid).set(k.toJson());
+      await firestore
+          .collection("users")
+          .doc(k.uid)
+          .set(k.toJson())
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        dismissLoadingWidget();
+        return null;
+      });
       return k;
     }
   }

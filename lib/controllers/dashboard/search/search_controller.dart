@@ -37,7 +37,10 @@ class SearchController extends GetxController
           .doc("products")
           .collection("product_detail")
           .where('product_name', isGreaterThanOrEqualTo: input.toUpperCase())
-          .get();
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        throw Exception();
+      });
 
       result.docs.forEach((element) {
         listProduct.add(Product.fromJson(element.data()));

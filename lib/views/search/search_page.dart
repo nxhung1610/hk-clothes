@@ -51,7 +51,7 @@ class searchWidgetState extends State<SearchPage>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     tween.end = size.width - size.width * 0.3;
-    /* searchController.refreshPage();*/ // TODO:here
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Search"),

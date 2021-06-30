@@ -48,7 +48,11 @@ class BagController extends GetxController {
     else
       n.first.number++;
     try {
-      await refbag.set(bag.value.toJson());
+      await refbag.set(bag.value.toJson()).timeout(Duration(seconds: 30),
+          onTimeout: () {
+        dismissLoadingWidget();
+        throw Exception();
+      });
       dismissLoadingWidget();
       showSnackbar("Add Bag", "Add Product to bag success", true);
     } catch (e) {
@@ -69,7 +73,11 @@ class BagController extends GetxController {
         element.pid == productBag.pid && element.sid == productBag.sid);
 
     try {
-      await refbag.set(bag.value.toJson());
+      await refbag.set(bag.value.toJson()).timeout(Duration(seconds: 30),
+          onTimeout: () {
+        dismissLoadingWidget();
+        throw Exception();
+      });
       dismissLoadingWidget();
       showSnackbar("Delete Product", "Delete Product from bag success", true);
     } catch (e) {
@@ -97,7 +105,11 @@ class BagController extends GetxController {
     n.first.number++;
 
     try {
-      await refbag.set(bag.toJson());
+      await refbag.set(bag.toJson()).timeout(Duration(seconds: 30),
+          onTimeout: () {
+        dismissLoadingWidget();
+        throw Exception();
+      });
       dismissLoadingWidget();
       showSnackbar("Add Product", "Increase success", true);
     } catch (e) {

@@ -3,20 +3,17 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/firebase.dart';
 import 'package:hk_clothes/models/product/product.dart';
 
-class CategoryController extends GetxController with SingleGetTickerProviderMixin
-{
+class CategoryController extends GetxController
+    with SingleGetTickerProviderMixin {
   static CategoryController instance = Get.find();
 
   final controller = ScrollController();
 
-
-
-  void scrollUp()
-  {
-    final double start =0;
-    controller.animateTo(start, duration: Duration(milliseconds: 800), curve: Curves.easeIn);
+  void scrollUp() {
+    final double start = 0;
+    controller.animateTo(start,
+        duration: Duration(milliseconds: 800), curve: Curves.easeIn);
   }
-
 
   @override
   void onInit() {
@@ -32,50 +29,47 @@ class CategoryController extends GetxController with SingleGetTickerProviderMixi
     listProduct.clear();
   }
 
-
   Future fetchProducts(String input) async {
     if (isLoading.value) return;
     isLoading.value = true;
-    try{
+    try {
       var result = await firestore
           .collection("shopstore")
           .doc("products")
-          .collection("product_detail").where('type',isEqualTo: input)
+          .collection("product_detail")
+          .where('type', isEqualTo: input)
           .limit(9)
-          .get();
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        throw Exception();
+      });
       result.docs.forEach((element) {
         listProduct.add(Product.fromJson(element.data()));
       });
-    }
-    catch(e)
-    {
-
-    }
+    } catch (e) {}
     isLoading.value = false;
   }
-
 
   Future fetchProductsNext(String input) async {
     if (isLoading.value) return;
     isLoading.value = true;
-    try{var result = await firestore
-        .collection("shopstore")
-        .doc("products")
-        .collection("product_detail").where('type',isEqualTo: input)
-        .orderBy("pid")
-        .startAfter([listProduct[listProduct.length - 1].pid])
-        .limit(9)
-        .get();
-    result.docs.forEach((element) {
-      listProduct.add(Product.fromJson(element.data()));
-    });}
-    catch(e)
-    {
-
-
-    }
+    try {
+      var result = await firestore
+          .collection("shopstore")
+          .doc("products")
+          .collection("product_detail")
+          .where('type', isEqualTo: input)
+          .orderBy("pid")
+          .startAfter([listProduct[listProduct.length - 1].pid])
+          .limit(9)
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+            throw Exception();
+          });
+      result.docs.forEach((element) {
+        listProduct.add(Product.fromJson(element.data()));
+      });
+    } catch (e) {}
     isLoading.value = false;
   }
-
-
 }

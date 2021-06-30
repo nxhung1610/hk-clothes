@@ -9,6 +9,7 @@ import 'package:hk_clothes/controllers/bag/bag_controller.dart';
 import 'package:hk_clothes/controllers/contact/contact_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/home/home_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/search/search_controller.dart';
+import 'package:hk_clothes/controllers/order/order_controller.dart';
 
 import 'package:hk_clothes/controllers/product/product_controller.dart';
 
@@ -50,6 +51,7 @@ Future main() async {
     Get.put(ShippingController());
     Get.put(CategoryController());
     Get.put(SearchController());
+    Get.put(OrderController());
   });
   runApp(MyApp());
 }

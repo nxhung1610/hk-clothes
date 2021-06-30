@@ -37,7 +37,10 @@ class UpdateInfoController extends GetxController
       var n = firebaseStorage
           .ref("users")
           .child(authController.userInfor.value.uid);
-      await n.putData(data);
+      await n.putData(data).timeout(Duration(seconds: 30), onTimeout: () {
+        dismissLoadingWidget();
+        throw Exception();
+      });
       dismissLoadingWidget();
 
       return await n.getDownloadURL();

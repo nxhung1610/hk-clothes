@@ -69,7 +69,11 @@ class ContactController extends GetxController {
           .doc(authController.userInfor.value.uid)
           .collection('contacts')
           .doc(contact.contactId)
-          .set(contact.toJson());
+          .set(contact.toJson())
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        dismissLoadingWidget();
+        throw Exception();
+      });
       dismissLoadingWidget();
     } catch (e) {
       dismissLoadingWidget();

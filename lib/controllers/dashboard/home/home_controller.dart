@@ -28,12 +28,12 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
 
   // Category
   final listCategory = [
-    Category(name: "Shirt", icon: categoryShirt,type: "1"),
-    Category(name: "T-Shirt", icon: categoryTShirt,type: "2"),
-    Category(name: "Hoodies", icon: categoryHoodie,type: "3"),
-    Category(name: "Short", icon: categoryShort,type: "4"),
-    Category(name: "Pants", icon: categoryPants,type: "5"),
-    Category(name: "Sweatshirt", icon: categorySweatshirt,type: "6"),
+    Category(name: "Shirt", icon: categoryShirt, type: "1"),
+    Category(name: "T-Shirt", icon: categoryTShirt, type: "2"),
+    Category(name: "Hoodies", icon: categoryHoodie, type: "3"),
+    Category(name: "Short", icon: categoryShort, type: "4"),
+    Category(name: "Pants", icon: categoryPants, type: "5"),
+    Category(name: "Sweatshirt", icon: categorySweatshirt, type: "6"),
   ];
 
   @override
@@ -69,7 +69,10 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
           .doc("products")
           .collection("product_detail")
           .limit(9)
-          .get();
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        throw Exception();
+      });
       result.docs.forEach((element) {
         listProductRecommand.add(Product.fromJson(element.data()));
       });
@@ -89,7 +92,10 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
           .startAfter(
               [listProductRecommand[listProductRecommand.length - 1].pid])
           .limit(9)
-          .get();
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+            throw Exception();
+          });
       result.docs.forEach((element) {
         listProductRecommand.add(Product.fromJson(element.data()));
       });
@@ -111,7 +117,10 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
           .doc("products")
           .collection("product_detail")
           .limit(9)
-          .get();
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        throw Exception();
+      });
       result.docs.forEach((element) {
         listProductTrending.add(Product.fromJson(element.data()));
       });
@@ -134,7 +143,10 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
           .doc("products")
           .collection("product_sale")
           .limit(9)
-          .get();
+          .get()
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        throw Exception();
+      });
       result.docs.forEach((element) async {
         final i = ProductSale.fromJson(element.data());
         final k = await firestore
@@ -142,7 +154,10 @@ class HomeController extends GetxController with SingleGetTickerProviderMixin {
             .doc("products")
             .collection("product_detail")
             .where("pid", isEqualTo: i.pid)
-            .get();
+            .get()
+            .timeout(Duration(seconds: 30), onTimeout: () {
+          throw Exception();
+        });
         if (k.docs[0].exists)
           listProductSale.add(Product.fromJson(k.docs[0].data()));
       });

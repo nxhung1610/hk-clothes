@@ -3,8 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
+import 'package:hk_clothes/models/order.dart';
 import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
 import 'package:hk_clothes/views/order/widgets/item_product.dart';
+import 'package:uuid/uuid.dart';
 
 class OrderInforPage extends StatefulWidget {
   OrderInforPage({key}) : super(key: key);
@@ -319,10 +321,16 @@ class _OrderInforPageState extends State<OrderInforPage> {
                   style: ElevatedButton.styleFrom(
                     primary: AppColors.app,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (contactController.selectContact.value.contactId !=
                         null) {
-                      showCustomDialog(true);
+                      final order = Order(
+                          orderId: Uuid().v1(),
+                          dateCreate: DateTime.now().toUtc().toString(),
+                          delivered: false,
+                          products: bagController.bag.value.productBags);
+                      showCustomDialog(
+                          await orderController.orderProducts(order));
                     } else
                       showActionSnackBar(context, 'Please add your contact');
                   },

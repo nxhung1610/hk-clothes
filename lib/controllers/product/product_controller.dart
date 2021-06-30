@@ -95,6 +95,8 @@ class ProductController extends GetxController {
             .doc('whitelist')
             .update({
           'products': FieldValue.arrayUnion([pid])
+        }).timeout(Duration(seconds: 30), onTimeout: () {
+          throw Exception();
         });
       } catch (e) {
         return isLiked;
@@ -108,6 +110,8 @@ class ProductController extends GetxController {
             .doc('whitelist')
             .update({
           'products': FieldValue.arrayRemove([pid])
+        }).timeout(Duration(seconds: 30), onTimeout: () {
+          throw Exception();
         });
       } catch (e) {
         return isLiked;
