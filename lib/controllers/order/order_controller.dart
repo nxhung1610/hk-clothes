@@ -39,6 +39,7 @@ class OrderController extends GetxController {
       return false;
     }
     dismissLoadingWidget();
-    return true;
+
+    return await bagController.clearProductBag();
   }
 }

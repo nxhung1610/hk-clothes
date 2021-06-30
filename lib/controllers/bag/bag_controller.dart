@@ -86,6 +86,23 @@ class BagController extends GetxController {
     }
   }
 
+  Future<bool> clearProductBag() async {
+    showLoading();
+    try {
+      await refbag
+          .set(Bag(productBags: []).toJson())
+          .timeout(Duration(seconds: 30), onTimeout: () {
+        dismissLoadingWidget();
+        throw Exception();
+      });
+      dismissLoadingWidget();
+      return true;
+    } catch (e) {
+      dismissLoadingWidget();
+      return false;
+    }
+  }
+
   Future incrNumProduct(ProductBag productBag) async {
     showLoading();
     if (productBag.sid == null) {

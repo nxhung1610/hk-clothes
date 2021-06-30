@@ -353,12 +353,12 @@ class _OrderInforPageState extends State<OrderInforPage> {
     );
   }
 
-  void showCustomDialog(bool isSuccess) {
+  Future<void> showCustomDialog(bool isSuccess) async {
     RxDouble size = 0.0.obs;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       size.value = 70;
     });
-    Get.defaultDialog(
+    await Get.defaultDialog(
       title: '',
       titleStyle: TextStyle(fontSize: 0),
       content: Obx(
@@ -407,5 +407,8 @@ class _OrderInforPageState extends State<OrderInforPage> {
         ),
       ),
     );
+    if (isSuccess) {
+      Get.back();
+    }
   }
 }
