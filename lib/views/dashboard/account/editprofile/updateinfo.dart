@@ -53,7 +53,7 @@ class UpdateInfo extends StatelessWidget {
                             0
                         ? MemoryImage(updateInfoController.selectedImage.value)
                         : authController.userInfor.value.photoUrl.isEmpty
-                            ? AssetImage('assets/images/logo_splash.png')
+                            ? AssetImage('assets/icon/icon.png')
                             : NetworkImage(
                                 authController.userInfor.value.photoUrl)),
               ),

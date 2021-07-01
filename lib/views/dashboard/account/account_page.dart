@@ -71,8 +71,7 @@ class AccountPage extends StatelessWidget {
                                       .userInfor.value.photoUrl.isNotEmpty
                                   ? NetworkImage(
                                       authController.userInfor.value.photoUrl)
-                                  : AssetImage(
-                                      'assets/images/logo_splash.png')))),
+                                  : AssetImage('assets/icon/icon.png')))),
                 ),
               ),
               Padding(

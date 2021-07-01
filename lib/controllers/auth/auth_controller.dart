@@ -79,7 +79,7 @@ class AuthController extends GetxController {
   }
 
   void fetchDataUser() {
-    dashBoardController = DashboardController.instance;
+    dashBoardController.reloadData();
     contactController.fetchDataContact();
     productController.fetchWishList();
     bagController.fecthBagUser();

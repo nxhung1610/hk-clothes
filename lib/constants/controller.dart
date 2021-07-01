@@ -15,7 +15,7 @@ import 'package:hk_clothes/controllers/product/product_controller.dart';
 import 'package:hk_clothes/controllers/dashboard/shipping/shipping_controller.dart';
 
 AuthController authController = AuthController.instance;
-DashboardController dashBoardController;
+DashboardController dashBoardController = DashboardController.instance;
 HomeController homeController = HomeController.instance;
 AccountController accountController = AccountController.instance;
 UpdateInfoController updateInfoController = UpdateInfoController.instance;

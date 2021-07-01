@@ -8,13 +8,12 @@ import 'package:hk_clothes/views/dashboard/shipping/shipping_page.dart';
 class DashboardController extends GetxController {
   static DashboardController instance = Get.find();
 
-  RxInt selectItemBottom;
+  RxInt selectItemBottom = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     // Init Controller
-    selectItemBottom = 0.obs;
   }
 
   reloadData() {

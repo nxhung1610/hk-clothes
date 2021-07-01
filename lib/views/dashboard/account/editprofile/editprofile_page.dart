@@ -59,19 +59,21 @@ class EditProfilePage extends StatelessWidget {
                       title: "Change your photo",
                       value: authController.userInfor.value.photoUrl,
                       widget: Container(
-                          width: 60.0,
-                          height: 60.0,
-                          decoration: BoxDecoration(
-                              color: AppColors.app.shade200,
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: authController
-                                          .userInfor.value.photoUrl.isNotEmpty
-                                      ? NetworkImage(authController
-                                          .userInfor.value.photoUrl)
-                                      : AssetImage(
-                                          'assets/images/logo_splash.png')))),
+                        width: 60.0,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          color: AppColors.app.shade200,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: authController
+                                    .userInfor.value.photoUrl.isNotEmpty
+                                ? NetworkImage(
+                                    authController.userInfor.value.photoUrl)
+                                : AssetImage('assets/icon/icon.png'),
+                          ),
+                        ),
+                      ),
                       function: 1),
                   Divider(thickness: 2),
                   EditProfile(
