@@ -36,10 +36,10 @@ class PaypalPaymentState extends State<PaypalPayment> {
     "currency": "USD"
   };
 
-  bool isEnableShipping = false;
-  bool isEnableAddress = false;
+  bool isEnableShipping = true;
+  bool isEnableAddress = true;
 
-  String returnURL = 'return.example.com';
+  String returnURL = 'https://www.facebook.com/nxhung.hit/';
   String cancelURL = 'cancel.example.com';
 
   @override
@@ -91,7 +91,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
     String addressCity = 'VietNam';
     String addressStreet = widget.order.contact.address;
     String addressZipCode = '700000';
-    String addressCountry = 'VietNam';
+    String addressCountry = 'VN';
     String addressState = 'VietNam';
     String addressPhoneNumber = widget.order.contact.phoneNumber;
 
