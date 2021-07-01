@@ -57,6 +57,12 @@ dependencies:
   #parse datetime
   intl: ^0.17.0
 
+  #paypal
+  http:
+  webview_flutter: ^2.0.9
+  http_auth: ^1.0.0
+  shared_preferences: ^2.0.6
+
 
 flutter_native_splash:
   image: assets/images/logo_splash.png
