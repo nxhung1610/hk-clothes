@@ -163,6 +163,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
                     .executePayment(executeUrl, payerID, accessToken)
                     .then((id) {
                   widget.onFinish(id);
+                  Get.back();
                 });
               } else {
                 widget.onFinish(null);
