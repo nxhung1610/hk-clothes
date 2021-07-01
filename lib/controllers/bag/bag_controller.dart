@@ -95,7 +95,6 @@ class BagController extends GetxController {
         dismissLoadingWidget();
         throw Exception();
       });
-      bag.value.productBags.clear();
       dismissLoadingWidget();
       return true;
     } catch (e) {

@@ -12,6 +12,7 @@ import 'package:hk_clothes/models/product/product_size.dart';
 import 'package:hk_clothes/models/product/size.dart';
 import 'package:hk_clothes/utils/helpers/show_loading.dart';
 import 'package:hk_clothes/utils/helpers/show_snackbar.dart';
+import 'package:hk_clothes/views/product/product_page.dart';
 
 class ProductController extends GetxController {
   static ProductController instance = Get.find();
@@ -26,7 +27,7 @@ class ProductController extends GetxController {
     sizes = <SizeProduct>[].obs;
     controller = ScrollController().obs;
     wishlist = <String>[].obs;
-    productWishList= <Product>[].obs;
+    productWishList = <Product>[].obs;
   }
 
   @override
@@ -38,12 +39,14 @@ class ProductController extends GetxController {
         .get()
         .then((value) => sizes.value =
             value.docs.map((e) => SizeProduct.fromJson(e.data())).toList());
-    ever(wishlist,fetchDataWishList);
+    ever(wishlist, fetchDataWishList);
     super.onReady();
   }
 
   void showInforItem(Product product, tag) {
-    Get.toNamed("/product", arguments: [product, tag]);
+    Get.to(() => ProductPage(product: product, tag: tag),
+        transition: Transition.rightToLeft,
+        duration: Duration(milliseconds: 350));
   }
 
   Future<ProductDetail> getProductDetail(String pid) async {
@@ -148,28 +151,20 @@ class ProductController extends GetxController {
     }
   }
 
-
-  fetchDataWishList(List<String> pid) async
-  {
-    try{
+  fetchDataWishList(List<String> pid) async {
+    try {
       firestore
           .collection("shopstore")
           .doc("products")
-          .collection("product_detail").where('pid',whereIn:pid )
-          .get().then((value) {
-            print(value.docs.length);
+          .collection("product_detail")
+          .where('pid', whereIn: pid)
+          .get()
+          .then((value) {
+        print(value.docs.length);
         productWishList.clear();
-        productWishList.addAll(value.docs.map((e) => Product.fromJson(e.data())).toList());
+        productWishList
+            .addAll(value.docs.map((e) => Product.fromJson(e.data())).toList());
       });
-
-    }
-    catch(e)
-    {
-
-    }
-
-
+    } catch (e) {}
   }
-
-
 }

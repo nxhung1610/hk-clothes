@@ -307,14 +307,16 @@ class _OrderInforPageState extends State<OrderInforPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 5),
                 child: Obx(
-                  () => Text(
-                    'Grand Total : ${bagController.sumPrice.value - bagController.discountPrice.value} VND',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.app.shade400,
-                      fontSize: 18,
-                    ),
-                  ),
+                  () => bagController.bag.value.productBags.length != 0
+                      ? Text(
+                          'Grand Total : ${bagController.sumPrice.value - bagController.discountPrice.value} VND',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.app.shade400,
+                            fontSize: 18,
+                          ),
+                        )
+                      : Container(),
                 ),
               ),
               Container(
@@ -425,13 +427,10 @@ class _OrderInforPageState extends State<OrderInforPage> {
       onTimeout: () {
         if (isSuccess) {
           Get.back();
-          Get.back();
-        } else
-          Get.back();
+        }
       },
     );
     if (isSuccess) {
-      Get.back();
       Get.back();
     }
   }

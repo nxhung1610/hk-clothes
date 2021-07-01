@@ -99,12 +99,6 @@ class MyApp extends StatelessWidget {
           transitionDuration: Duration(milliseconds: 350),
         ),
         GetPage(
-          name: "/product",
-          page: () => ProductPage(),
-          transition: Transition.rightToLeft,
-          transitionDuration: Duration(milliseconds: 350),
-        ),
-        GetPage(
           name: "/bag",
           page: () => BagPage(),
           transition: Transition.topLevel,

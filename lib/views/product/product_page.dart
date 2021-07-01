@@ -12,10 +12,12 @@ import 'package:hk_clothes/models/product/size.dart';
 import 'package:like_button/like_button.dart';
 
 class ProductPage extends StatelessWidget {
+  final Product product;
+  final tag;
+  const ProductPage({key, @required this.product, @required this.tag})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final Product product = Get.arguments[0];
-    final tag = Get.arguments[1];
     final size = MediaQuery.of(context).size;
     RxDouble opacity = 0.0.obs;
     _onScroll() {
