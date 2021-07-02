@@ -28,29 +28,29 @@ Thanh toán qua Paypal và nah65n hàng
 
 ## Thư viện và công nghệ
 
-get: ^4.1.4
-flutter_svg: ^0.22.0
-cupertino_icons: ^1.0.2
-firebase_auth: ^1.3.0
-firebase_core: ^1.2.1
-cloud_firestore: ^2.2.2
-firebase_storage: ^8.1.3
-flutter_spinkit: ^5.0.0
-flutter_snake_navigationbar: ^0.5.0
-shimmer: ^2.0.0
-cached_network_image: ^3.0.0
-image_picker: ^0.8.1+3
-flutter_native_splash: ^1.2.0 
-font_awesome_flutter: ^9.1.0
-badges: ^2.0.1
-like_button: ^2.0.2
-uuid: 3.0.4
-intl: ^0.17.0
-http:
-webview_flutter: ^2.0.9
-http_auth: ^1.0.0
-shared_preferences: ^2.0.6
-image: ^3.0.2
+- get: ^4.1.4
+- flutter_svg: ^0.22.0
+- cupertino_icons: ^1.0.2
+- firebase_auth: ^1.3.0
+- firebase_core: ^1.2.1
+- cloud_firestore: ^2.2.2
+- firebase_storage: ^8.1.3
+- flutter_spinkit: ^5.0.0
+- flutter_snake_navigationbar: ^0.5.0
+- shimmer: ^2.0.0
+- cached_network_image: ^3.0.0
+- image_picker: ^0.8.1+3
+- flutter_native_splash: ^1.2.0 
+- font_awesome_flutter: ^9.1.0
+- badges: ^2.0.1
+- like_button: ^2.0.2
+- uuid: 3.0.4
+- intl: ^0.17.0
+- http:
+- webview_flutter: ^2.0.9
+- http_auth: ^1.0.0
+- shared_preferences: ^2.0.6
+- image: ^3.0.2
 
 
 ## Project Developer
