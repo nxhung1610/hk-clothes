@@ -3,7 +3,7 @@
 Ứng dụng ẩm thực Việt Nam - Tìm kiếm và nấu ăn tại nhà một cách dễ dàng
 
 <center>
-<img src="assets/icons/app_logo.png"/>
+<img src="assets/icons/icon.png"/>
 </center>
 
 
