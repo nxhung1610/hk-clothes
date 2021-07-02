@@ -19,7 +19,7 @@ class WishListTab extends StatelessWidget {
         child: Column(
           children: [
             Obx(
-              () => productController.productWishList.length != 0
+              () => productController.wishlist.length != 0
                   ? GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.symmetric(horizontal: 5),
@@ -30,9 +30,7 @@ class WishListTab extends StatelessWidget {
                         mainAxisSpacing: 5,
                         crossAxisSpacing: 5,
                       ),
-                      itemCount: productController.productWishList != null
-                          ? productController.productWishList.length
-                          : 0,
+                      itemCount: productController.productWishList.length ?? 0,
                       itemBuilder: (context, index) {
                         return ProductItem(
                           size: size.width * (1 / 3),
@@ -43,9 +41,6 @@ class WishListTab extends StatelessWidget {
                     )
                   : Container(),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
           ],
         ),
       ),
