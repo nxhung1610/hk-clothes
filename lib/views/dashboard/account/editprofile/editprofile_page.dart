@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/controllers/auth/auth_controller.dart';
 import 'package:hk_clothes/views/dashboard/account/widget/editprofile_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key key}) : super(key: key);
@@ -58,20 +60,24 @@ class EditProfilePage extends StatelessWidget {
                   EditProfile(
                       title: "Change your photo",
                       value: authController.userInfor.value.photoUrl,
-                      widget: Container(
-                        width: 60.0,
-                        height: 60.0,
-                        decoration: BoxDecoration(
-                          color: AppColors.app.shade200,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: authController
-                                    .userInfor.value.photoUrl.isNotEmpty
-                                ? NetworkImage(
-                                    authController.userInfor.value.photoUrl)
-                                : AssetImage('assets/icon/icon.png'),
+                      widget: CachedNetworkImage(
+                        imageUrl: authController.userInfor.value.photoUrl ??
+                            "https://www.google.com/",
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          radius: 40,
+                          backgroundImage: imageProvider,
+                        ),
+                        errorWidget: (context, url, error) => CircleAvatar(
+                          radius: 40,
+                          backgroundImage: AssetImage("assets/icon/icon.png"),
+                        ),
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundColor: AppColors.app,
                           ),
+                          baseColor: AppColors.app[550],
+                          highlightColor: Colors.grey[100],
                         ),
                       ),
                       function: 1),

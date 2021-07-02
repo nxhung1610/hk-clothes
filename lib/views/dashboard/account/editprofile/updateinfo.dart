@@ -48,6 +48,7 @@ class UpdateInfo extends StatelessWidget {
                 },
                 child: CircleAvatar(
                     radius: 100,
+                    backgroundColor: AppColors.app,
                     backgroundImage: updateInfoController
                                 .selectedImage.value.length !=
                             0

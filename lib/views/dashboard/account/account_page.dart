@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:hk_clothes/constants/app_color.dart';
 import 'package:hk_clothes/constants/controller.dart';
 import 'package:hk_clothes/controllers/dashboard/account/account_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key key}) : super(key: key);
@@ -59,19 +60,26 @@ class AccountPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Obx(
-                  () => Container(
-                      width: 90.0,
-                      height: 90.0,
-                      decoration: BoxDecoration(
-                          color: AppColors.app.shade200,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: authController
-                                      .userInfor.value.photoUrl.isNotEmpty
-                                  ? NetworkImage(
-                                      authController.userInfor.value.photoUrl)
-                                  : AssetImage('assets/icon/icon.png')))),
+                  () => CachedNetworkImage(
+                    imageUrl: authController.userInfor.value.photoUrl ??
+                        "https://www.google.com/",
+                    imageBuilder: (context, imageProvider) => CircleAvatar(
+                      radius: 50,
+                      backgroundImage: imageProvider,
+                    ),
+                    errorWidget: (context, url, error) => CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage("assets/icon/icon.png"),
+                    ),
+                    placeholder: (context, url) => Shimmer.fromColors(
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundColor: AppColors.app,
+                      ),
+                      baseColor: AppColors.app[550],
+                      highlightColor: Colors.grey[100],
+                    ),
+                  ),
                 ),
               ),
               Padding(
