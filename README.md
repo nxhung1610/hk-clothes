@@ -1,6 +1,6 @@
 # HK-Clothes
 
-Ứng dụng ẩm thực Việt Nam - Tìm kiếm và nấu ăn tại nhà một cách dễ dàng
+Ứng dụng thởi trang Hàng đầu Việt Nam
 
 <center>
 <img src="assets/icon/icon.png"/>
@@ -16,7 +16,7 @@ Tìm và mua ngay những bộ đồ thời trang mà bạn thích
 - Lưu lại thông tin (Bag,WishList)
 Lưu lại thông tin những món đồ yêu thích
 - Thanh toán 
-Thanh toán qua Paypal và nah65n hàng
+Thanh toán qua Paypal và nhận hàng
 
 
 ## Yêu Cầu Thiết Bị
