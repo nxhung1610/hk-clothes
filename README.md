@@ -55,8 +55,8 @@ image: ^3.0.2
 
 ## Project Developer
 
--Nguyễn Xuân Hưng
--Lê Nguyễn Minh Khoa
+- Nguyễn Xuân Hưng
+- Lê Nguyễn Minh Khoa
 
 ## License
 
