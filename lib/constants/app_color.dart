@@ -11,7 +11,7 @@ class AppColors {
     500: const Color(0xff999999),
     550: const Color(0xffF2F2F2),
     600: const Color(0xFFFFFFFF),
-    700: const Color(0xFFF57373),
+    700: const Color(0xFFE23939),
     800: const Color(0xffffffff),
     900: const Color(0xffffffff)
   });

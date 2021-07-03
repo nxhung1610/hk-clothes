@@ -232,10 +232,7 @@ class UpdateInfo extends StatelessWidget {
 
                           case 5:
                             authController.userInfor.value.gender =
-                                updateInfoController.groupValue.value
-                                    .toString()
-                                    .split('.')
-                                    .last;
+                                controller.text;
                             Get.back();
                             continue update;
                           case 6:
