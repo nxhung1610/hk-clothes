@@ -126,6 +126,26 @@ class AuthController extends GetxController {
             "The account already exists for that email.", false);
       }
     } catch (e) {
+      dismissLoadingWidget();
+      print(e);
+    }
+  }
+
+  Future forgotPassword() async {
+    if (!validatedInputForgot()) {
+      return;
+    }
+    showLoading();
+    try {
+      firebaseAuth.sendPasswordResetEmail(email: emailController.text.trim());
+      dismissLoadingWidget();
+      showSnackbar("Forgot password", "Request is send to your email", true);
+    } on FirebaseAuthException catch (e) {
+      dismissLoadingWidget();
+      showSnackbar("Forgot password", "Something error", false);
+    } catch (e) {
+      dismissLoadingWidget();
+      showSnackbar("Forgot password", "Something error", false);
       print(e);
     }
   }
@@ -148,6 +168,15 @@ class AuthController extends GetxController {
     if (passwordController.text.trim().isEmpty ||
         !emailController.text.trim().isEmail) {
       showSnackbar("Login Failed", "Input not valid", false);
+      return false;
+    }
+    return true;
+  }
+
+  bool validatedInputForgot() {
+    if (!emailController.text.trim().isEmail ||
+        emailController.text.trim().isEmpty) {
+      showSnackbar("Forgot password", "Input not valid", false);
       return false;
     }
     return true;

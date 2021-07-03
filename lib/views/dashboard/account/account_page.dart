@@ -90,7 +90,9 @@ class AccountPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      authController.userInfor.value.nickname,
+                      authController.userInfor.value != null
+                          ? authController.userInfor.value.nickname
+                          : "Nick Name",
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
